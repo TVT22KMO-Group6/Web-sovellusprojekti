@@ -13,10 +13,8 @@ public class Co2_concentrations {
 
     private Integer month;
 
-    @Column(name = "data")
     private float data;
 
-    @Column(name = "timeframe")
     private String timeframe;
 
     @Column(name = "ice_core")
