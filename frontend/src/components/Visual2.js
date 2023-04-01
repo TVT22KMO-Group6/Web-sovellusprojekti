@@ -7,7 +7,6 @@ import 'chartjs-adapter-luxon';
 
 Chart.register(LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend);
 
-// Define API endpoints
 const maunaLoaMonthlyUrl = `http://localhost:8080/visual2/mauna-loa-monthly`;
 const maunaLoaAnnualUrl = `http://localhost:8080/visual2/mauna-loa-annual`;
 const iceCore1Url = `http://localhost:8080/visual2/ice-core-1`;
@@ -21,14 +20,6 @@ const Visual2 = () => {
   const [iceCore1, seticeCore1Array] = useState([]);
   const [iceCore2, seticeCore2Array] = useState([]);
   const [iceCore3, seticeCore3Array] = useState([]);
-
-  useEffect(() => {
-    console.log('Processed Mauna Loa Annual Data:', maunaLoaAnnual);
-  }, [maunaLoaAnnual]);
-
-  useEffect(() => {
-    console.log('Processed Antarctic Dataset 2:', iceCore2);
-  }, [iceCore2]);
 
     useEffect(() => {
     const fetchData = async () => {
@@ -47,25 +38,22 @@ const Visual2 = () => {
           axios.get(iceCore3Url),
         ]);
 
-        console.log('Raw Mauna Loa Annual Data:', maunaLoaAnnualResponse.data);
-        console.log('Raw Antarctic Dataset 2:', iceCore2Response.data);
-
         setmaunaArray(maunaLoaMonthlyResponse.data.map(mauna => {
-          return { x: DateTime.fromObject({ year: mauna.year, month: mauna.monthOfYear }), y: mauna.data }
+          return { x: DateTime.fromObject({ year: mauna.year, month: mauna.month || 1 }), y: mauna.data }
         }));
         
         setmaunaArrayM(maunaLoaAnnualResponse.data.map(maunaM => {
           return { x: DateTime.fromObject({ year: maunaM.year, month: 1 }), y: maunaM.data }
         }));
-  
+        
         seticeCore1Array(iceCore1Response.data.map(Ice1 => {
           return { x: DateTime.fromObject({ year: Ice1.year, month: 1 }), y: Ice1.data }
         }));
-  
+        
         seticeCore2Array(iceCore2Response.data.map(Ice2 => {
           return { x: DateTime.fromObject({ year: Ice2.year, month: 1 }), y: Ice2.data }
         }));
-  
+        
         seticeCore3Array(iceCore3Response.data.map(Ice3 => {
           return { x: DateTime.fromObject({ year: Ice3.year, month: 1 }), y: Ice3.data }
         }));
@@ -96,21 +84,21 @@ const Visual2 = () => {
       },
 
       {
-       label: 'Antarctic Ice Core Set 1',
+       label: 'Ice Core 1',
     data: iceCore1,
     borderColor: 'rgb(102, 0, 51)',
     backgroundColor: 'rgba(102, 0, 51, 0.5)',
     pointRadius: 2,
   },
   {
-    label: 'Antarctic Ice Core Set 2',
+    label: 'Ice Core 2',
     data: iceCore2,
     borderColor: 'rgb(51, 51, 153)',
     backgroundColor: 'rgba(51, 51, 153, 0.5)',
     pointRadius: 2,
   },
   {
-    label: 'Antarctic Ice Core Set 3',
+    label: 'Ice Core 3',
     data: iceCore3,
     borderColor: 'rgb(0, 102, 204)',
     backgroundColor: 'rgba(0, 102, 204, 0.5)',
@@ -130,7 +118,7 @@ const options = {
       position: 'bottom',
       title:{
         display: true,
-        text: "date",
+        text: "Date",
       }
 
     },
@@ -150,7 +138,7 @@ const options = {
       },
       title: {
         display: true,
-        text: 'DATAAAA',
+        text: 'Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurements',
       },
       legend: {
         display: true,
