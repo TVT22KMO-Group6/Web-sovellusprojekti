@@ -7,48 +7,62 @@ import 'chartjs-adapter-luxon';
 
 Chart.register(LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend);
 
-// Define API endpoints
-const maunaLoaMonthlyUrl = 'http://localhost:8080/visual2/timeframe/monthly';
-const maunaLoaAnnualUrl = 'http://localhost:8080/visual2/timeframe/annual';
-const antarcticDataset1Url = 'http://localhost:8080/visual2/ice_core/1';
-const antarcticDataset2Url = 'http://localhost:8080/visual2/ice_core/2';
-const antarcticDataset3Url = 'http://localhost:8080/visual2/ice_core/3';
+const maunaLoaMonthlyUrl = `http://localhost:8080/visual2/mauna-loa-monthly`;
+const maunaLoaAnnualUrl = `http://localhost:8080/visual2/mauna-loa-annual`;
+const iceCore1Url = `http://localhost:8080/visual2/ice-core-1`;
+const iceCore2Url = `http://localhost:8080/visual2/ice-core-2`;
+const iceCore3Url = `http://localhost:8080/visual2/ice-core-3`;
+
 
 const Visual2 = () => {
-  const [maunaLoaMonthly, setMaunaLoaMonthly] = useState([]);
-  const [maunaLoaAnnual, setMaunaLoaAnnual] = useState([]);
-  const [antarcticDataset1, setAntarcticDataset1] = useState([]);
-  const [antarcticDataset2, setAntarcticDataset2] = useState([]);
-  const [antarcticDataset3, setAntarcticDataset3] = useState([]);
+  const [maunaLoaMonthly, setmaunaArray] = useState([]);
+  const [maunaLoaAnnual, setmaunaArrayM] = useState([]);
+  const [iceCore1, seticeCore1Array] = useState([]);
+  const [iceCore2, seticeCore2Array] = useState([]);
+  const [iceCore3, seticeCore3Array] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchData = async () => {
       try {
         const [
           maunaLoaMonthlyResponse,
           maunaLoaAnnualResponse,
-          antarcticDataset1Response,
-          antarcticDataset2Response,
-          antarcticDataset3Response,
+          iceCore1Response,
+          iceCore2Response,
+          iceCore3Response,
         ] = await Promise.all([
           axios.get(maunaLoaMonthlyUrl),
           axios.get(maunaLoaAnnualUrl),
-          axios.get(antarcticDataset1Url),
-          axios.get(antarcticDataset2Url),
-          axios.get(antarcticDataset3Url),
+          axios.get(iceCore1Url),
+          axios.get(iceCore2Url),
+          axios.get(iceCore3Url),
         ]);
 
-        setMaunaLoaMonthly(maunaLoaMonthlyResponse.data);
-        console.log(maunaLoaMonthlyResponse.data);
-        setMaunaLoaAnnual(maunaLoaAnnualResponse.data);
-        setAntarcticDataset1(antarcticDataset1Response.data);
-        setAntarcticDataset2(antarcticDataset2Response.data);
-        setAntarcticDataset3(antarcticDataset3Response.data);
+        setmaunaArray(maunaLoaMonthlyResponse.data.map(mauna => {
+          return { x: DateTime.fromObject({ year: mauna.year, month: mauna.month || 1 }), y: mauna.data }
+        }));
+        
+        setmaunaArrayM(maunaLoaAnnualResponse.data.map(maunaM => {
+          return { x: DateTime.fromObject({ year: maunaM.year, month: 1 }), y: maunaM.data }
+        }));
+        
+        seticeCore1Array(iceCore1Response.data.map(Ice1 => {
+          return { x: DateTime.fromObject({ year: Ice1.year, month: 1 }), y: Ice1.data }
+        }));
+        
+        seticeCore2Array(iceCore2Response.data.map(Ice2 => {
+          return { x: DateTime.fromObject({ year: Ice2.year, month: 1 }), y: Ice2.data }
+        }));
+        
+        seticeCore3Array(iceCore3Response.data.map(Ice3 => {
+          return { x: DateTime.fromObject({ year: Ice3.year, month: 1 }), y: Ice3.data }
+        }));
+  
       } catch (error) {
-        console.error('Error fetching data:', error);
+        alert(error.response.data.error);
       }
     };
-
+  
     fetchData();
   }, []);
 
@@ -59,10 +73,6 @@ const Visual2 = () => {
         data: maunaLoaMonthly,
         borderColor: 'rgb(255, 102, 0)',
         backgroundColor: 'rgba(255, 102, 0, 0.3)',
-        parsing: {
-          xAxisKey: 'year',
-          yAxisKey: 'co2',
-        },
         pointRadius: 2,
       },
       {
@@ -70,61 +80,57 @@ const Visual2 = () => {
         data: maunaLoaAnnual,
         borderColor: 'rgb(204, 0, 204)',
         backgroundColor: 'rgba(204, 0, 204, 0.5)',
-        parsing: {
-          xAxisKey: 'year',
-          yAxisKey: 'co2',
-        },
         pointRadius: 2,
       },
 
       {
-       label: 'Antarctic Ice Core Set 1',
-    data: antarcticDataset1,
+       label: 'Ice Core 1',
+    data: iceCore1,
     borderColor: 'rgb(102, 0, 51)',
     backgroundColor: 'rgba(102, 0, 51, 0.5)',
-    parsing: {
-      xAxisKey: 'year',
-      yAxisKey: 'co2',
-    },
     pointRadius: 2,
   },
   {
-    label: 'Antarctic Ice Core Set 2',
-    data: antarcticDataset2,
+    label: 'Ice Core 2',
+    data: iceCore2,
     borderColor: 'rgb(51, 51, 153)',
     backgroundColor: 'rgba(51, 51, 153, 0.5)',
-    parsing: {
-      xAxisKey: 'year',
-      yAxisKey: 'co2',
-    },
     pointRadius: 2,
   },
   {
-    label: 'Antarctic Ice Core Set 3',
-    data: antarcticDataset3,
+    label: 'Ice Core 3',
+    data: iceCore3,
     borderColor: 'rgb(0, 102, 204)',
     backgroundColor: 'rgba(0, 102, 204, 0.5)',
-    parsing: {
-      xAxisKey: 'year',
-      yAxisKey: 'co2',
-    },
     pointRadius: 2,
   },
 ],
 };
 
 const options = {
-    scales: {
-      x: {
-        type: 'time',
-        time: {
-          unit: 'year',
-        },
+  scales: {
+
+    x: {
+      type: 'time',
+      time: {
+        unit: 'year',
       },
-      y: {
-        type: 'linear',
+      position: 'bottom',
+      title:{
+        display: true,
+        text: "Date",
+      }
+
+    },
+    y: {
+      type: "linear",
+      position: "left",
+      title: {
+        display: true,
+        text: "CO2 levels",
       },
     },
+  },
     plugins: {
       tooltip: {
         mode: 'index',
@@ -132,7 +138,7 @@ const options = {
       },
       title: {
         display: true,
-        text: 'Antarctic Ice Core Data',
+        text: 'Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurements',
       },
       legend: {
         display: true,
