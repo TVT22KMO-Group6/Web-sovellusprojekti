@@ -13,7 +13,7 @@ public class Visual3Service {
     @Autowired
     private Temperature_evolutionRepository temperature_evolutionRepository;
 
-    public List<Temperature_evolution> findAll() {
+    public List<Temperature_evolution> getAllData() {
         return temperature_evolutionRepository.findAll();
       }
       

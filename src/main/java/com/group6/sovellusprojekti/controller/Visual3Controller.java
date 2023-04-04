@@ -16,6 +16,6 @@ public class Visual3Controller {
 
     @GetMapping("visual3")
     public List<Temperature_evolution> getData() {
-        return Visual3Service.findAll();
+        return Visual3Service.getAllData();
     }
 }

@@ -11,7 +11,7 @@ public class Temperature_evolution {
 
     private int year;
 
-    private int data;
+    private long data;
 
     private String event;
 
@@ -31,11 +31,11 @@ public class Temperature_evolution {
         this.year = year;
     }
 
-    public float getData() {
+    public long getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(long data) {
         this.data = data;
     }
 
