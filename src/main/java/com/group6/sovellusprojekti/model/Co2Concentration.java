@@ -4,21 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "co2_concentrations")
-public class Co2_concentrations {
+public class Co2Concentration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    private int year;
-
+    private Integer year;
     private Integer month;
-
-    @Column(name = "data")
-    private float data;
-
-    @Column(name = "timeframe")
+    private Double data;
     private String timeframe;
-
     @Column(name = "ice_core")
     private Integer iceCore;
 
@@ -46,11 +40,11 @@ public class Co2_concentrations {
         this.month = month;
     }
 
-    public float getData() {
+    public Double getData() {
         return data;
     }
 
-    public void setData(float data) {
+    public void setData(Double data) {
         this.data = data;
     }
 
