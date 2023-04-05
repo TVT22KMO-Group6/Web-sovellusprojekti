@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import { Chart, DoughnutController, ArcElement } from 'chart.js';
+import '../styles/Visual5.css';
+Chart.register (DoughnutController, ArcElement );
 
-const App = () => {
+const Visual5 = () => {
   const [emissionData, setEmissionData] = useState([]);
   const [subEmissionData, setSubsectorData] = useState([]);
   const [displayedChart, setDisplayedChart] = useState('sector');
@@ -33,7 +36,7 @@ const App = () => {
     '#FF2D00', '#20E800', '#E7F200', '#0074FF',
     '#FF7000', '#B5FF00', '#BD00FF', '#FF0088',
     '#FFC5E4', '#58F3EE', '#566573', '#D5DBDB',
-    
+
   ];
 
   const sectorData = {
@@ -60,7 +63,7 @@ const App = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -85,7 +88,7 @@ const App = () => {
 
   const subsectorOptions = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -99,7 +102,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ width: '50%', height: '50%' }}>
+    <div className="chart-container">
       {displayedChart === 'sector' ? (
         <Doughnut key={chartKey} data={sectorData} options={options} />
       ) : (
@@ -109,4 +112,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Visual5;
