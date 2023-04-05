@@ -5,9 +5,11 @@ import '../styles/Navbar.css';
 const Navbar = () => {
   return (
     <div className="navbar">
-      <Link to="/" className="nav-link">
-        Group6
-      </Link>
+      <div className='homepage'>
+        <Link to="/" className="nav-link">
+          Group6
+        </Link>
+      </div>
       <div className="nav-links">
         <Link to="/signin" className="nav-link">
           Sign In
