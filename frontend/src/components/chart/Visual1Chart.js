@@ -1,89 +1,212 @@
-import React from "react";
-import { Chart } from "chart.js/auto";
-import { Line } from "react-chartjs-2";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { Line } from 'react-chartjs-2';
+import { useState, useEffect, useMemo } from 'react';
+import { DateTime } from 'luxon';
 
-const testData = [
-    {
-        id: 1,
-        time: 1850,
-        temperature: -0.418,
-        hemisphere: "Global",
-        timeframe: "Annual"
-    },
-    {
-        id: 11,
-        time: 1860,
-        temperature: -0.39,
-        hemisphere: "Global",
-        timeframe: "Annual"
-    },
-    {
-      id: 127,
-      time: 1976,
-      temperature: -0.216,
-      hemisphere: "Global",
-      timeframe: "Annual"
+const sortAnnualData = (a, b) => {
+  const n = a.time - b.time;
+  if (n !== 0) {
+    return n;
   }
-];
+};
 
-export default function Visual1Chart() {
-  const [chartData, setChartData] = useState([]);
+const sortMonthlyData = (a, b) => {
+  return a.time.localeCompare(b.time);
+};
+
+const Visual1Chart = () => {
+  const [timeframe, setTimeframe] = useState("Annual");
+  const [globalAnnualData, setGlobalAnnualData] = useState([]);
+  const [northAnnualData, setNorthAnnualData] = useState([]);
+  const [southAnnualData, setSouthAnnualData] = useState([]);
+  const [reconstructionData, setReconstructionData] = useState([]);
+  const [globalMonthlyData, setGlobalMonthlyData] = useState([]);
+  const [northMonthlyData, setNorthMonthlyData] = useState([]);
+  const [southMonthlyData, setSouthMonthlyData] = useState([]);
+
+  const filteredData = useMemo(() => {
+    return {
+      Global: {
+        Annual: globalAnnualData,
+        Monthly: globalMonthlyData,
+      },
+      Northern: {
+        Annual: northAnnualData,
+        Monthly: northMonthlyData,
+      },
+      Southern: {
+        Annual: southAnnualData,
+        Monthly: southMonthlyData,
+      },
+      Reconstruction: {
+        Annual: reconstructionData,
+      },
+    };
+  }, [globalAnnualData, northAnnualData, southAnnualData, reconstructionData, globalMonthlyData, northMonthlyData, southMonthlyData]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/visual1`)
-     .then(response => setChartData(response.json()));
-   }, []);
+    setTimeframe(timeframe);
+    const fetchData = async () => {
+      const response = await fetch(process.env.REACT_APP_VISUAL_1_DATA_URL);
+      const json = await response.json();
 
-    const data = {
+      setGlobalAnnualData(json.filter(data => data.hemisphere === 'Global' && data.timeframe === 'Annual')
+        .sort(sortAnnualData)
+        .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy"), y: data.temperature }))
+      );
+      setNorthAnnualData(json.filter(json => json.hemisphere === 'Northern' && json.timeframe === 'Annual')
+        .sort(sortAnnualData)
+        .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy"), y: data.temperature }))
+      );
+      setSouthAnnualData(json.filter(json => json.hemisphere === 'Southern' && json.timeframe === 'Annual')
+        .sort(sortAnnualData)
+        .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy"), y: data.temperature }))
+      );
+
+      setReconstructionData(json.filter(json => json.hemisphere === 'Reconstruction' && json.timeframe === 'Annual')
+        .sort(sortAnnualData)
+        .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy"), y: data.temperature }))
+      );
+
+      setGlobalMonthlyData(json.filter(json => json.hemisphere === 'Global' && json.timeframe === 'Monthly')
+        .sort(sortMonthlyData)
+        .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy-MM"), y: data.temperature }))
+      );
+      setNorthMonthlyData(json.filter(json => json.hemisphere === 'Northern' && json.timeframe === 'Monthly')
+        .sort(sortMonthlyData)
+        .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy-MM"), y: data.temperature }))
+      );
+      setSouthMonthlyData(json.filter(json => json.hemisphere === 'Southern' && json.timeframe === 'Monthly')
+        .sort(sortMonthlyData)
+        .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy-MM"), y: data.temperature }))
+      );
+    }
+
+    fetchData().catch(console.error);
+  }, [timeframe])
+
+  const TimeframeAnnual = () => {
+    setTimeframe("Annual");
+  };
+
+  const TimeframeMonthly= () => {
+    setTimeframe("Monthly");
+  };
+
+    const annualData = {
       datasets: [
         {
-          label: "Global annual anomalies",
-          data: chartData,
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          //yAxisID: "temperature",
-          parsing: {
-            xAxisKey: "time",
-            yAxisKey: "temperature",
-          },
-          pointRadius: 1,
+          label: 'Global annual anomalies',
+          data: filteredData.Global.Annual,
+          borderColor: 'rgb(0, 0, 0)',
+          backgroundColor: 'rgb(0, 0, 0, 0.5)'
         },
         {
-            label: "North annual anomalies"
+          label: 'North annual anomalies',
+          data: filteredData.Northern.Annual,
+          borderColor: 'rgb(255, 0, 0)',
+          backgroundColor: 'rgb(255, 0, 0, 0.5)'
         },
         {
-            label: "South annual anomalies"
+          label: 'South annual anomalies',
+          data: filteredData.Southern.Annual,
+          borderColor: 'rgb(255, 200, 0)',
+          backgroundColor: 'rgb(255, 200, 0, 0.5)'
         },
         {
-            label: "Reconstruction"
+          label: 'Reconstruction',
+          data: filteredData.Reconstruction.Annual,
+          borderColor: 'rgb(0, 126, 255)',
+          backgroundColor: 'rgb(0, 126, 255, 0.5)'
+        }
+      ],
+    };
+
+    const monthlyData = {
+      datasets: [
+        {
+          label: 'Global monthly anomalies',
+          data: filteredData.Global.Monthly,
+          borderColor: 'rgb(0, 0, 0)',
+          backgroundColor: 'rgb(0, 0, 0, 0.5)'
+        },
+        {
+          label: 'North monthly anomalies',
+          data: filteredData.Northern.Monthly,
+          borderColor: 'rgb(255, 0, 0)',
+          backgroundColor: 'rgb(255, 0, 0, 0.5)'
+        },
+        {
+          label: 'South monthly anomalies',
+          data: filteredData.Southern.Monthly,
+          borderColor: 'rgb(255, 200, 0)',
+          backgroundColor: 'rgb(255, 200, 0, 0.5)'
         }
       ],
     };
   
     const options = {
       responsive: true,
+      animation: false,
       plugins: {
-        legend: {
-          position: "top",
+        tooltip: {
+          mode: 'index',
+          intersect: false
         },
         title: {
-          display: false,
+          display: true,
+          text: "HadCRUT5 Temperature Anomaly Analysis"
         },
       },
+      adapters: {
+        date: { id: 'luxon', DateTime },
+      },
       scales: {
-        temperature: {
-          type: "linear",
-          display: true,
-          position: "bottom",
+        x: {
+          type: 'time',
+          time: {
+            unit: 'year',
+          },
+          position: 'bottom',
+          title:{
+            display: true,
+            text: "Date",
+          }
         },
+        y: {
+          type: "linear",
+          position: "left",
+          title: {
+            display: true,
+            text: "Temperature Anomaly",
+          },
+          min: -1.5,
+          max: 1.5
+        },
+      },
+      elements: {
+        point:{
+            radius: 0
+        }
       },
     };
   
     return (
-      <div style={{ width: "50%" }}>
-        <h1>LineChart</h1>
-        <Line options={options} data={data} />
+      <div style={{ width: '95%' }}>
+        <div className='container-visual-radios'>
+          <div className='radio'>
+          <input type='radio' id='annual' name='timeframe' defaultChecked onClick={TimeframeAnnual}/>
+          <label htmlFor='annual'>Annual</label>
+          </div>
+          <div className='radio'>
+          <input type='radio' id='monthly' name='timeframe' onClick={TimeframeMonthly} />
+            <label htmlFor='monthly'>Monthly</label>
+          </div>
+        </div>
+        {timeframe === "Annual" && <Line data={annualData} options={options} />}
+        {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
       </div>
     );
-  }
+  };
+//<Line options={options} data={timeframe === "Annual" ? annualData : monthlyData} />
+  export default Visual1Chart;
