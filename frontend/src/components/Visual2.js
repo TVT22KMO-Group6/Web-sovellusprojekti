@@ -7,13 +7,6 @@ import 'chartjs-adapter-luxon';
 
 Chart.register(LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend);
 
-const maunaLoaMonthlyUrl = `http://localhost:8080/visual2/mauna-loa-monthly`;
-const maunaLoaAnnualUrl = `http://localhost:8080/visual2/mauna-loa-annual`;
-const iceCore1Url = `http://localhost:8080/visual2/ice-core-1`;
-const iceCore2Url = `http://localhost:8080/visual2/ice-core-2`;
-const iceCore3Url = `http://localhost:8080/visual2/ice-core-3`;
-
-
 const Visual2 = () => {
   const [maunaLoaMonthly, setmaunaArray] = useState([]);
   const [maunaLoaAnnual, setmaunaArrayM] = useState([]);
@@ -31,11 +24,11 @@ const Visual2 = () => {
           iceCore2Response,
           iceCore3Response,
         ] = await Promise.all([
-          axios.get(maunaLoaMonthlyUrl),
-          axios.get(maunaLoaAnnualUrl),
-          axios.get(iceCore1Url),
-          axios.get(iceCore2Url),
-          axios.get(iceCore3Url),
+          axios.get(process.env.REACT_APP_VISUAL_2_MAUNA_LOA_MONTHLY_API_URL),
+          axios.get(process.env.REACT_APP_VISUAL_2_MAUNA_LOA_ANNUAL_API_URL),
+          axios.get(process.env.REACT_APP_VISUAL_2_ICE_CORE_1_API_URL),
+          axios.get(process.env.REACT_APP_VISUAL_2_ICE_CORE_2_API_URL),
+          axios.get(process.env.REACT_APP_VISUAL_2_ICE_CORE_3_API_URL),
         ]);
 
         setmaunaArray(maunaLoaMonthlyResponse.data.map(mauna => {

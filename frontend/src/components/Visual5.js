@@ -15,13 +15,13 @@ const Visual5 = () => {
   }, []);
 
   const fetchEmissionSectors = async () => {
-    const response = await fetch('http://localhost:8080/emission-sectors');
+    const response = await fetch(process.env.REACT_APP_VISUAL_5_SECTORS_API_URL);
     const data = await response.json();
     setEmissionData(data);
   };
 
   const handleSectorClick = async (sectorId) => {
-    const response = await fetch(`http://localhost:8080/emission-subsectors/${sectorId}`);
+    const response = await fetch(process.env.REACT_APP_VISUAL_5_SUB_SECTORS_API_URL + sectorId);
     const data = await response.json();
     setSubsectorData(data);
   };

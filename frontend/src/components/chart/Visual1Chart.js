@@ -47,7 +47,7 @@ const Visual1Chart = () => {
   useEffect(() => {
     setTimeframe(timeframe);
     const fetchData = async () => {
-      const response = await fetch(process.env.REACT_APP_VISUAL_1_DATA_URL);
+      const response = await fetch(process.env.REACT_APP_VISUAL_1_API_URL);
       const json = await response.json();
 
       setGlobalAnnualData(json.filter(data => data.hemisphere === 'Global' && data.timeframe === 'Annual')
@@ -62,7 +62,6 @@ const Visual1Chart = () => {
         .sort(sortAnnualData)
         .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy"), y: data.temperature }))
       );
-
       setReconstructionData(json.filter(json => json.hemisphere === 'Reconstruction' && json.timeframe === 'Annual')
         .sort(sortAnnualData)
         .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy"), y: data.temperature }))
