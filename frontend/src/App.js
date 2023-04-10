@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Visual2 from './components/Visual2';
 import Visual1 from './pages/Visual1';
 import Visual5 from './components/Visual5';
+import Visual4 from './pages/Visual4';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
       <Routes>
         <Route path="/visual1" element={<Visual1 />} />
         <Route path="/visual2" element={<Visual2 />} />
+
+        <Route path="/visual4" element={<Visual4 />} />
         <Route path="/visual5" element={<Visual5 />} />
         <Route path="/" element={<Frontpage />} />
       </Routes>
