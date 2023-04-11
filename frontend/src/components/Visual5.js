@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, DoughnutController, ArcElement } from 'chart.js';
-import '../styles/Visual5.css';
 Chart.register (DoughnutController, ArcElement );
 
 const Visual5 = () => {
@@ -63,7 +62,7 @@ const Visual5 = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     plugins: {
       title: {
         display: true,
@@ -88,7 +87,7 @@ const Visual5 = () => {
 
   const subsectorOptions = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     plugins: {
       title: {
         display: true,
@@ -102,7 +101,7 @@ const Visual5 = () => {
   };
 
   return (
-    <div className="chart-container">
+    <div>
       {displayedChart === 'sector' ? (
         <Doughnut key={chartKey} data={sectorData} options={options} />
       ) : (
