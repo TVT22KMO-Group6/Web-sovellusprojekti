@@ -8,6 +8,7 @@ import Visual1 from './pages/Visual1';
 import Visual5 from './components/Visual5';
 import RegisterModal from './components/RegisterModal';
 import LoginModal from './components/LoginModal';
+import Visual4 from './pages/Visual4';
 
 function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -35,6 +36,8 @@ function App() {
       <Routes>
         <Route path="/visual1" element={<Visual1 />} />
         <Route path="/visual2" element={<Visual2 />} />
+
+        <Route path="/visual4" element={<Visual4 />} />
         <Route path="/visual5" element={<Visual5 />} />
         <Route path="/" element={<Frontpage />} />
       </Routes>
