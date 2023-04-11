@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ openRegisterModal, openLoginModal }) => {
   return (
     <div className="navbar">
       <div className='homepage'>
@@ -11,12 +11,12 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="nav-links">
-        <Link to="/signin" className="nav-link">
-          Sign In
-        </Link>
-        <Link to="/register" className="nav-link">
+        <button className="nav-link" onClick={openLoginModal}>
+          Login
+        </button>
+        <button className="nav-link" onClick={openRegisterModal}>
           Register
-        </Link>
+        </button>
       </div>
     </div>
   );

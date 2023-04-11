@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.group6.sovellusprojekti.model.Co2ConcentrationRepository;
 import com.group6.sovellusprojekti.model.Co2Concentration;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 
 import java.util.List;
 
@@ -15,27 +13,28 @@ public class Visual2Service {
     @Autowired
     private Co2ConcentrationRepository repository;
 
-    private Sort sortByYearAndMonth() {
-        return Sort.by(Order.asc("year"), Order.asc("month"));
-    }
 
     public List<Co2Concentration> getMaunaLoaMonthlyData() {
-        return repository.findByTimeframe("Monthly", sortByYearAndMonth());
+        return repository.findByTimeframe("Monthly");
     }
     
     public List<Co2Concentration> getMaunaLoaAnnualData() {
-        return repository.findByTimeframe("Annual", sortByYearAndMonth());
+        return repository.findByTimeframe("Annual");
     }
     
     public List<Co2Concentration> getIceCore1Data() {
-        return repository.findByIceCore(1, sortByYearAndMonth());
+        return repository.findByIceCore(1);
     }
     
     public List<Co2Concentration> getIceCore2Data() {
-        return repository.findByIceCore(2, sortByYearAndMonth());
+        return repository.findByIceCore(2);
     }
     
     public List<Co2Concentration> getIceCore3Data() {
-        return repository.findByIceCore(3, sortByYearAndMonth());
+        return repository.findByIceCore(3);
+    }
+
+    public List<Co2Concentration> getAllData() {
+        return repository.findAll();
     }
 }
