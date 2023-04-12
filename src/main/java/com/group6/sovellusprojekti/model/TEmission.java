@@ -3,14 +3,14 @@ package com.group6.sovellusprojekti.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "emission")
+@Table(name = "territorial_emissions")
 public class TEmission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String emission;
-    private float year;
-    private float country;
+    private Float emission;
+    private int year;
+    private String country;
 
     public int getId() {
         return id;
@@ -20,26 +20,26 @@ public class TEmission {
         this.id = id;
     }
 
-    public String getTEmission() {
+    public Float getTEmission() {
         return emission;
     }
 
-    public void setTEmission(String emission) {
+    public void setTEmission(Float emission) {
         this.emission = emission;
     }
 
-    public float getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(float year) {
+    public void setYear(int year) {
         this.year = year;
     }
-    public float getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setCountry(float country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
