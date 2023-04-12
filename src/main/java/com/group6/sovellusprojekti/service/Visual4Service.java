@@ -14,18 +14,21 @@ import com.group6.sovellusprojekti.model.TEmissionRepository;
 @Service
 public class Visual4Service {
     @Autowired
-    
-    private Sort sortByYear() {
-        return Sort.by(Order.asc("year"));
-    }
-
     private TEmissionRepository TEmissionRepository;
 
-    public List<TEmission> getAllTEmissions() {
-        return TEmissionRepository.findByEmission("emission");
+     private Sort sortByYear() {
+        return Sort.by(Order.asc("year"));
     }
-    public List<TEmission> getAllTEmissionsByCountry() {
-        return TEmissionRepository.findByCountry("country");
+    
+
+    public List<TEmission> getAllTEmissions() {
+        return TEmissionRepository.findAll();
+    }
+    public List<TEmission> getAllTEmissionsByCountry(String country) {
+        return TEmissionRepository.findByCountry(country);
+    }
+    public List<TEmission> getAllTEmissionsByYear(int year) {
+        return TEmissionRepository.findByYear(year); 
     }
    
 

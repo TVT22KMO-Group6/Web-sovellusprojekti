@@ -4,16 +4,23 @@ import { Line } from "react-chartjs-2";
 import { useState, useEffect } from "react";
 
 
-export default function Visual1Chart() {
+export default function Visual4Chart() {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/visual4`)
-     .then(response => setChartData(response.json()));
+    const fetchData = async () => {
+      const res = await fetch("/api/visual4/");
+      const data = await res.json();
+      console.log("foobar", data)
+      setChartData(data);
+    };
+    fetchData();
    }, []);
+   
 
     const data = {
       datasets: [
+       
         {
           label: "USA",
           data: chartData,
@@ -76,4 +83,5 @@ export default function Visual1Chart() {
         <Line options={options} data={data} />
       </div>
     );
+ 
   }
