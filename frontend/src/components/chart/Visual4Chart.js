@@ -12,6 +12,21 @@ export default function Visual4Chart() {
       const res = await fetch("/api/visual4/");
       const data = await res.json();
       console.log("foobar", data)
+    
+  
+const emissionsByCountry = new Map();
+data.forEach((row) => {
+  if (!emissionsByCountry.has(row.country)) {
+    emissionsByCountry.set(row.country, []);
+
+  }
+  emissionsByCountry.get(row.country).push(row);
+});
+
+emissionsByCountry.forEach((rows, country) => {
+  rows.sort((a, b) => a.year - b.year);
+});
+console.log("foobar2", emissionsByCountry);
       setChartData(data);
     };
     fetchData();
