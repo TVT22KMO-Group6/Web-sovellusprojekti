@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
+import ClimateStatsLogo from '../images/climatestatslogo.jpeg'; // Make sure the path to the image is correct
 
 const Navbar = ({ openRegisterModal, openLoginModal }) => {
   return (
     <div className="navbar">
       <div className='homepage'>
-        <Link to="/" className="nav-link">
-          Group6
-        </Link>
+      <Link to="/">
+       <img src={ClimateStatsLogo} alt="ClimateStats" className="nav-link logo" />
+      </Link>
+
       </div>
       <div className="nav-links">
         <button className="nav-link" onClick={openLoginModal}>
