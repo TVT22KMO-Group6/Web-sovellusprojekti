@@ -6,13 +6,14 @@ import Navbar from './components/Navbar';
 import Visual2 from './components/Visual2';
 import Visual1 from './pages/Visual1';
 import Visual5 from './components/Visual5';
-import RegisterModal from './components/RegisterModal';
-import LoginModal from './components/LoginModal';
 import Visual4 from './pages/Visual4';
 import Nav1 from './pages/Nav1';
 import Nav2 from './pages/Nav2';
 import Nav3 from './pages/Nav3';
-
+import ProtectedRoute from './components/ProtectedRoute';
+import RegisterModal from './components/user/RegisterModal';
+import LoginModal from './components/user/LoginModal';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -38,6 +39,7 @@ function App() {
       <Navbar openRegisterModal={openRegisterModal}
               openLoginModal={openLoginModal} />
       <Routes>
+        <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> }/>
         <Route path="/visual1" element={<Visual1 />} />
         <Route path="/visual2" element={<Visual2 />} />
 

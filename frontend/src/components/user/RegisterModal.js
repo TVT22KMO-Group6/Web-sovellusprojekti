@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/RegisterModal.css';
+import '../../styles/RegisterModal.css';
 
 const RegisterModal = ({ isOpen, closeModal }) => {
   const [username, setUsername] = useState('');

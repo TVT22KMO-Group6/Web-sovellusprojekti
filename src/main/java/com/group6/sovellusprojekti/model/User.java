@@ -3,21 +3,19 @@ package com.group6.sovellusprojekti.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "user", schema = "public")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "\"id\"")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "\"username\"", unique = true)
+    @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "\"password\"")
+    @Column(name = "password")
     private String password;
-
-    // Getters and setters
 
     public Long getId() {
         return id;

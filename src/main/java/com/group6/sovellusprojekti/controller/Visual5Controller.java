@@ -13,7 +13,7 @@ import com.group6.sovellusprojekti.model.EmissionSubSector;
 import com.group6.sovellusprojekti.service.Visual5Service;
 
 @RestController
-@RequestMapping("/api/emission-sectors")
+@RequestMapping("/api/visual5/emission-sectors")
 class EmissionSectorController {
 
     @Autowired
@@ -27,7 +27,7 @@ class EmissionSectorController {
 }
 
 @RestController
-@RequestMapping("/api/emission-subsectors")
+@RequestMapping("/api/visual5/emission-subsectors")
 class EmissionSubSectorController {
 
     @Autowired

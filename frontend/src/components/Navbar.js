@@ -10,6 +10,15 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
     setShowDropdown(!showDropdown);
   };
 
+  const isLoggedIn = () => {
+    return localStorage.getItem('token') !== null;
+  };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    window.location.reload(false);
+  };
+
   return (
     <div className="navbar">
       <div className='homepage'>
@@ -30,12 +39,14 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
         </div>
       </div>
       <div className="nav-links">
-        <button className="nav-link" onClick={openLoginModal}>
-          Login
-        </button>
-        <button className="nav-link" onClick={openRegisterModal}>
-          Register
-        </button>
+        {isLoggedIn() ? (
+          <button className="nav-link" onClick={logout}>Logout</button>
+        ) : (
+          <React.Fragment>
+            <button className="nav-link" onClick={openLoginModal}>Login</button>
+            <button className="nav-link" onClick={openRegisterModal}>Register</button>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );
