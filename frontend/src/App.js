@@ -9,6 +9,10 @@ import Visual5 from './components/Visual5';
 import RegisterModal from './components/RegisterModal';
 import LoginModal from './components/LoginModal';
 import Visual4 from './pages/Visual4';
+import Nav1 from './pages/Nav1';
+import Nav2 from './pages/Nav2';
+import Nav3 from './pages/Nav3';
+
 
 function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -40,6 +44,11 @@ function App() {
         <Route path="/visual4" element={<Visual4 />} />
         <Route path="/visual5" element={<Visual5 />} />
         <Route path="/" element={<Frontpage />} />
+        <Route path="/N1" element={<Nav1 />} />
+        <Route path="/N2" element={<Nav2 />} />
+        <Route path="/N3" element={<Nav3 />} />
+
+
       </Routes>
       <RegisterModal isOpen={isRegisterModalOpen} closeModal={closeRegisterModal} />
       <LoginModal isOpen={isLoginModalOpen} closeModal={closeLoginModal} />
