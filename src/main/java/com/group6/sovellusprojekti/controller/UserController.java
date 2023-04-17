@@ -12,7 +12,7 @@ import com.group6.sovellusprojekti.model.User;
 import com.group6.sovellusprojekti.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
