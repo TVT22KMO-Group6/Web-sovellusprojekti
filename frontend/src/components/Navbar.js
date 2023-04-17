@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
+import ClimateStatsLogo from '../images/climatestatslogo.jpeg'; // Make sure the path to the image is correct
 
 const Navbar = ({ openRegisterModal, openLoginModal }) => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -11,7 +12,10 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
 
   return (
     <div className="navbar">
-      <div className="homepage">
+      <div className='homepage'>
+      <Link to="/">
+       <img src={ClimateStatsLogo} alt="ClimateStats" className="nav-link logo" />
+      </Link>
         <div className="dropdown">
           <button className="dropbtn" onClick={toggleDropdown}>
             Dropmenu
@@ -38,4 +42,3 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
 };
 
 export default Navbar;
-
