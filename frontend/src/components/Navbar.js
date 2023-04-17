@@ -14,8 +14,8 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
     <div className="navbar">
       <div className='homepage'>
       <Link to="/" className="nav-link logo">
-  <img src={ClimateStatsLogo} alt="ClimateStats" className="logo-image" />
-</Link>
+       <img src={ClimateStatsLogo} alt="ClimateStats" className="logo-image" />
+      </Link>
         <div className="dropdown">
           <button className="dropbtn" onClick={toggleDropdown}>
             Dropmenu
