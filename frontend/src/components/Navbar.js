@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
-import ClimateStatsLogo from '../images/climatestatslogo.jpeg'; // Make sure the path to the image is correct
+import ClimateStatsLogo from '../images/climatestatslogo.jpeg';
 
 const Navbar = ({ openRegisterModal, openLoginModal }) => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -13,8 +13,8 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
   return (
     <div className="navbar">
       <div className='homepage'>
-      <Link to="/">
-       <img src={ClimateStatsLogo} alt="ClimateStats" className="nav-link logo" />
+      <Link to="/" className="nav-link logo">
+       <img src={ClimateStatsLogo} alt="ClimateStats" className="logo-image" />
       </Link>
         <div className="dropdown">
           <button className="dropbtn" onClick={toggleDropdown}>
