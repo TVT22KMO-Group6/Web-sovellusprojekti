@@ -1,25 +1,31 @@
 .container-N1 {
-    position: relative;
-  }
-  
-  .content-N1 {
-    position: absolute;
-    margin-top: 300px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  
-  .background-image {
-    background-image: url("../images/nature1.jpg");
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
-  
+  position: relative;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.content-N1 {
+  margin: 100px 50px;
+}
+
+.background-image {
+  background-image: url("../images/nature1.jpg");
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.visual2-container {
+  margin: 0 50px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px rgba(255, 255, 255, 0.8);
+}
