@@ -147,6 +147,8 @@ const Visual2 = () => {
 };
 
 const options = {
+  responsive: true,
+  maintainAspectRatio: false,
   scales: {
 
     x: {
@@ -189,10 +191,12 @@ const options = {
   };
 
   return (
-    <div>
-      <Line data={data} options={options} />
+    <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ position: "relative", width: "100%", height: "800px" }}>
+        <Line data={data} options={options} />
+      </div>
     </div>
-  );  
+  );
 };
 
 
