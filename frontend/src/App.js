@@ -3,16 +3,16 @@ import { Route, Routes } from 'react-router-dom';
 import './styles/App.css';
 import Frontpage from './pages/Frontpage';
 import Navbar from './components/Navbar';
-import Visual2 from './components/chart/Visual2';
+import Visual2 from './components/chart/Visual2Chart';
 import Visual1 from './pages/Visual1';
-import Visual5 from './components/chart/Visual5';
+import Visual5 from './components/chart/Visual5Chart';
 import Visual4 from './pages/Visual4';
 import Nav1 from './pages/Nav1';
 import Nav2 from './pages/Nav2';
 import Nav3 from './pages/Nav3';
 import ProtectedRoute from './components/ProtectedRoute';
-import RegisterModal from './components/user/RegisterModal';
-import LoginModal from './components/user/LoginModal';
+import RegisterModal from './components/user/Register';
+import LoginModal from './components/user/Login';
 import Dashboard from './pages/Dashboard';
 
 function App() {
