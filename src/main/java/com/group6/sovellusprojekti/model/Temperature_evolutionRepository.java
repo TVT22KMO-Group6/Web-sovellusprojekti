@@ -1,10 +1,9 @@
 package com.group6.sovellusprojekti.model;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 public interface Temperature_evolutionRepository extends JpaRepository<Temperature_evolution, Integer> {
-    List<Temperature_evolution> findByYear(int year);
-    List<Temperature_evolution> findByEvent(String event);
+     List<Temperature_evolution> findAll();
+     List<Temperature_evolution> findByType(String type);
 }
