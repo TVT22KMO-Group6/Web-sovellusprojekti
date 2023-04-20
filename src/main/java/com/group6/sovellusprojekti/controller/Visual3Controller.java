@@ -13,11 +13,22 @@ import com.group6.sovellusprojekti.service.Visual3Service;
 @RestController
 @RequestMapping("/api/visual3")
 public class Visual3Controller {
+
     @Autowired
-    private Visual3Service Visual3Service;
+    private Visual3Service visual3Service;
 
     @GetMapping
-    public List<Temperature_evolution> getData() {
-        return Visual3Service.getAllData();
+    public List<Temperature_evolution> getAllData() {
+        return visual3Service.getAllData();
+    }
+
+    @GetMapping("/type/Gast")
+    public List<Temperature_evolution> getGastData() {
+        return visual3Service.getGastData();
+    }
+
+    @GetMapping("/type/Carbon")
+    public List<Temperature_evolution> getCarbonData() {
+        return visual3Service.getCarbonData();
     }
 }

@@ -15,6 +15,8 @@ public class Temperature_evolution {
 
     private String event;
 
+    private String type;
+
     public int getId() {
         return id;
     }
@@ -45,5 +47,13 @@ public class Temperature_evolution {
 
     public void setEvent(String event) {
         this.event = event;
+    }
+
+    public String getType(){
+        return type;
+    }
+
+    public void setType(String type){
+        this.type = type;
     }
 }
