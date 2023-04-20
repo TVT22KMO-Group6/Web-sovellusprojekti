@@ -13,7 +13,7 @@ public class Temperature_evolution {
 
     private long data;
 
-    private String event;
+    private String eventtext;
 
     private String type;
 
@@ -41,12 +41,12 @@ public class Temperature_evolution {
         this.data = data;
     }
 
-    public String getEvent(){
-        return event;
+    public String getEventText(){
+        return eventtext;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setEventText(String eventtext) {
+        this.eventtext = eventtext;
     }
 
     public String getType(){
