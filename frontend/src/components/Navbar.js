@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
-import ClimateStatsLogo from '../images/climatestatslogo.jpeg';
+import ClimateStatsLogo from '../images/climatestatslogo2.png';
 import Dropdown from 'react-bootstrap/Dropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

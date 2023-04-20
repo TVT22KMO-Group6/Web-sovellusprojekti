@@ -191,8 +191,8 @@ const options = {
   };
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <div style={{ position: "relative", width: "100%", height: "800px" }}>
+    <div style={{ width: "100%", height: "80vh" }}>
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
         <Line data={data} options={options} />
       </div>
     </div>
