@@ -17,13 +17,14 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         try {
             userService.registerUser(user);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (RuntimeException e) {
+            System.out.println("Error: " + e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }

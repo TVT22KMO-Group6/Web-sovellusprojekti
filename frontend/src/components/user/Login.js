@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/LoginModal.css';
+import '../../styles/Login.css';
 
 const LoginModal = ({ isOpen, closeModal }) => {
 
