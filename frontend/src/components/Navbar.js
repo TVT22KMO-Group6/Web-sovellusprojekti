@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
 import ClimateStatsLogo from '../images/climatestatslogo2.png';
-import Dropdown from 'react-bootstrap/Dropdown';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Navbar = ({ openRegisterModal, openLoginModal }) => {
 
@@ -17,7 +15,43 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
   };
 
   return (
-    <div className="navbar">
+    <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top px-3">
+      <a className="navbar-logo" href="/">
+        <img src={ClimateStatsLogo} alt="ClimateStats" className="logo-image" />
+      </a>
+      <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="navbar-collapse collapse" id="navbar">
+        <ul className="navbar-nav me-auto">
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Views</a>
+            <div className="dropdown-menu" aria-labelledby="dropdown01">
+              <a className="dropdown-item" href="/N1">N1</a>
+              <a className="dropdown-item" href="/N2">N2</a>
+              <a className="dropdown-item" href="/N3">N3</a>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          {isLoggedIn() ? (
+            <li className="nav-item">
+              <a className="nav-link" href="#" onClick={logout}>Logout</a>
+            </li>
+          ) : (
+            <React.Fragment>
+              <li className="nav-item">
+                <a className="nav-link" href="#" onClick={openLoginModal}>Login</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#" onClick={openRegisterModal}>Register</a>
+              </li>
+            </React.Fragment>
+          )}
+        </ul>
+        
+      </div>
+    {/*<div className="navbar">
       <div className='homepage'>
       <Link to="/" className="nav-link logo">
        <img src={ClimateStatsLogo} alt="ClimateStats" className="logo-image" />
@@ -44,7 +78,8 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
     </React.Fragment>
   )}
 </div>
-    </div>
+  </div>*/}
+    </nav>
   );
 };
 

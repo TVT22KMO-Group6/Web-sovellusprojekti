@@ -6,7 +6,7 @@ import Visual2 from '../components/chart/Visual2Chart';
 
 function N1() {
   return (
-    <div className="container-N1">
+    <main role="main" class="container-fluid">
       <div className="background-image" style={{ backgroundImage: `url(${natureImage})` }}></div>
       <div className="content-wrapper">
       <div className="content-N1">
@@ -23,7 +23,7 @@ function N1() {
           <Visual2 />
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
