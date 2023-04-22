@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
 import ClimateStatsLogo from '../images/climatestatslogo2.png';
+import deleteUser from './user/DeleteUser';
 
 const Navbar = ({ openRegisterModal, openLoginModal }) => {
 
@@ -13,7 +14,7 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
     localStorage.removeItem('token');
     window.location.reload(false);
   };
-
+  
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top px-3">
       <a className="navbar-logo" href="/">
@@ -34,11 +35,16 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          {isLoggedIn() ? (
+        {isLoggedIn() ? (
+          <React.Fragment>
+            <li className="nav-item">
+              <a className="nav-link" href="#" onClick={deleteUser}>Delete Account</a>
+            </li>
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={logout}>Logout</a>
             </li>
-          ) : (
+          </React.Fragment>
+        ) : (
             <React.Fragment>
               <li className="nav-item">
                 <a className="nav-link" href="#" onClick={openLoginModal}>Login</a>
