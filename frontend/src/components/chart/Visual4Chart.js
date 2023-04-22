@@ -1,102 +1,104 @@
-import React from "react";
-import { Chart } from "chart.js/auto";
+import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { useState, useEffect } from "react";
-
+import Select from "react-select";
 
 export default function Visual4Chart() {
   const [chartData, setChartData] = useState([]);
+  const [selectedCountries, setSelectedCountries] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/api/visual4/");
       const data = await res.json();
-      console.log("foobar", data)
-    
-  
-const emissionsByCountry = new Map();
-data.forEach((row) => {
-  if (!emissionsByCountry.has(row.country)) {
-    emissionsByCountry.set(row.country, []);
 
-  }
-  emissionsByCountry.get(row.country).push(row);
-});
+      const emissionsByCountry = new Map();
+      data.forEach((row) => {
+        if (!emissionsByCountry.has(row.country)) {
+          emissionsByCountry.set(row.country, []);
+        }
+        emissionsByCountry.get(row.country).push(row);
+      });
 
-emissionsByCountry.forEach((rows, country) => {
-  rows.sort((a, b) => a.year - b.year);
-});
-console.log("foobar2", emissionsByCountry);
-      setChartData(data);
+      emissionsByCountry.forEach((rows, country) => {
+        rows.sort((a, b) => a.year - b.year);
+      });
+
+      setChartData(emissionsByCountry);
     };
     fetchData();
-   }, []);
-   
+  }, []);
 
-    const data = {
-      datasets: [
-       
-        {
-          label: "USA",
-          data: chartData,
-            backgroundColor: "rgba(0, 0, 255, 0.5)",
-         
-          parsing: {
-            xAxisKey: "emissions",
-            yAxisKey: "year",
-          },
-          pointRadius: 1,
-        },
-        {
-            label: "China",
-          data: chartData,
-            backgroundColor: "rgba(37, 171, 255, 0.8)",
-         
-          parsing: {
-            xAxisKey: "emissions",
-            yAxisKey: "year",
-          },
-          pointRadius: 1,
-        },
-        {
-            label: "Canada",
-          data: chartData,
-            backgroundColor: "rgba(0, 255, 0, 0.8)",
-         
-          parsing: {
-            xAxisKey: "emissions",
-            yAxisKey: "year",
-          },
-          pointRadius: 1,
-        },
-    
-      ],
-    };
-  
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: "top",
-        },
+  const countries = Array.from(chartData.keys()).map((country) => ({
+    label: country,
+    value: country,
+  }));
+
+  const data = {
+    datasets: selectedCountries.map((country) => ({
+      label: country,
+      data: chartData.get(country),
+      backgroundColor: `rgba(${Math.random() * 255}, ${
+        Math.random() * 255
+      }, ${Math.random() * 255}, 0.5)`,
+      parsing: {
+        xAxisKey: "year",
+        yAxisKey: "emissions",
+      },
+      pointRadius: 1,
+    })),
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: false,
+      },
+    },
+    scales: {
+      x: {
+        type: "linear",
+        display: true,
         title: {
-          display: false,
-        },
-      },
-      scales: {
-        temperature: {
-          type: "linear",
           display: true,
-          position: "bottom",
+          text: "Year",
         },
       },
-    };
-  
-    return (
-      <div style={{ width: "50%" }}>
-        <h1>LineChart</h1>
-        <Line options={options} data={data} />
-      </div>
-    );
- 
-  }
+      y: {
+        type: "linear",
+        display: true,
+        title: {
+          display: true,
+          text: "Emissions",
+        },
+      },
+    },
+  };
+
+  return (
+    <div style={{ width: "50%" }}>
+      <h1>LineChart</h1>
+      <Select
+        isMulti
+        value={selectedCountries.map((country) => ({
+          label: country,
+          value: country,
+        }))}
+        options={countries}
+        onChange={(selectedOptions) =>
+          setSelectedCountries(selectedOptions.map((option) => option.value))
+        }
+        styles={{
+          control: (provided) => ({
+            ...provided,
+            width: "100%",
+          }),
+        }}
+      />
+      <Line options={options} data={data} />
+    </div>
+  );
+}
