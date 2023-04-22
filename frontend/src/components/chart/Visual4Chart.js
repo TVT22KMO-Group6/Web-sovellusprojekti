@@ -16,7 +16,10 @@ export default function Visual4Chart() {
         if (!emissionsByCountry.has(row.country)) {
           emissionsByCountry.set(row.country, []);
         }
-        emissionsByCountry.get(row.country).push(row);
+        emissionsByCountry.get(row.country).push({
+          ...row,
+          emissions: row.temission * 3.664, // Multiply emission data with 3.664
+        });
       });
 
       emissionsByCountry.forEach((rows, country) => {
@@ -24,6 +27,10 @@ export default function Visual4Chart() {
       });
 
       setChartData(emissionsByCountry);
+
+      // Print the emission data for the USA to the console
+      const usaEmissions = emissionsByCountry.get("USA");
+      console.log("USA emissions:", usaEmissions);
     };
     fetchData();
   }, []);
