@@ -16,11 +16,20 @@ public class UserService {
 
     public void registerUser(User user) {
 
-        if (userRepository.findByUsername(user.getUsername()) != null) {
+        if (userRepository.existsByUsername(user.getUsername())) {
             throw new RuntimeException("Username already exists");
         }
         
         user.setPassword(encoderService.encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    public User getUserByUsername(String username)
+    {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        return userRepository.findByUsername(username);
     }
 }

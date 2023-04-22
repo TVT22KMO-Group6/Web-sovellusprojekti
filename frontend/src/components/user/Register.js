@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../styles/RegisterModal.css';
+import '../../styles/Register.css';
 
-const RegisterModal = ({ isOpen, closeModal }) => {
+const Register = ({ isOpen, closeModal }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -49,18 +49,20 @@ const RegisterModal = ({ isOpen, closeModal }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="modal-input"
+            aria-label="Username *"
             required
           />
-
+  
           <h4 className="label">Password *</h4>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="modal-input"
+            aria-label="Password *"
             required
           />
-
+  
           <div className="button-container">
             <button type="submit" className="modal-button">Register</button>
             <button type="button" className="modal-button" onClick={closeModal}>Cancel</button>
@@ -71,4 +73,4 @@ const RegisterModal = ({ isOpen, closeModal }) => {
   );
 };
 
-export default RegisterModal;
+export default Register;

@@ -12,18 +12,19 @@ import com.group6.sovellusprojekti.model.User;
 import com.group6.sovellusprojekti.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
-
+    
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         try {
             userService.registerUser(user);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (RuntimeException e) {
+            System.out.println("Error: " + e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
