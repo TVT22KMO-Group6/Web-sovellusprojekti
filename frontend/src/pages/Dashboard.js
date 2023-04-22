@@ -19,11 +19,13 @@ function Dashboard() {
   }, []);
 
   return (
+    <main role="main" class="container-fluid">
       <div className="container-dashboard">
         <div className="content-dashboard">
         <h1>Welcome, {userData && userData.username}!</h1>
         </div>
       </div>  
+    </main>
     );  
 }
 

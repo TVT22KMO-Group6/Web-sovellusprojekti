@@ -3,9 +3,9 @@ import Visual1Chart from '../components/chart/Visual1Chart';
 
 function Visual1() {
   return (
-    <div className="container-visual1">
+    <main role="main" class="container-fluid">
       <Visual1Chart/>
-    </div>  
+    </main>
   );
 }
 
