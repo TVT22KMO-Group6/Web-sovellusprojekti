@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import java.security.Principal;
 
 import com.group6.sovellusprojekti.model.User;
 import com.group6.sovellusprojekti.service.UserService;
@@ -28,4 +30,18 @@ public class UserController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteUser(Principal principal) {
+        try {
+            User user = userService.getUserByUsername(principal.getName());
+            userService.deleteUser(user.getId());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (RuntimeException e) {
+            System.out.println("Error: " + e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    
 }
