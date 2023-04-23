@@ -8,7 +8,7 @@ import Visual5 from '../components/chart/Visual5Chart';
 
 function N2() {
   return (
-    <main role="main" class="container-fluid">
+    <main role="main" className="container-fluid">
       <div className="background-image" style={{backgroundImage: `url(${natureImage})`}}></div>
       <div className="content-wrapper">
       <div className="content-N2">
