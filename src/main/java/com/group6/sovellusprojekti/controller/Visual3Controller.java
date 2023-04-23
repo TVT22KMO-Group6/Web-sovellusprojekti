@@ -22,9 +22,9 @@ public class Visual3Controller {
         return visual3Service.getAllData();
     }
 
-    @GetMapping("/type/Gast")
-    public List<Temperature_evolution> getGastData() {
-        return visual3Service.getGastData();
+    @GetMapping("/type/Global")
+    public List<Temperature_evolution> getGlobalData() {
+        return visual3Service.getGlobalData();
     }
 
     @GetMapping("/type/Carbon")

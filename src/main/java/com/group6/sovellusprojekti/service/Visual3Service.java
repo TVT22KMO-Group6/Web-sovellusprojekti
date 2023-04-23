@@ -17,8 +17,8 @@ public class Visual3Service {
         return teRepository.findAll();
       }
 
-      public List<Temperature_evolution> getGastData() {
-        return teRepository.findByType("Gast");
+      public List<Temperature_evolution> getGlobalData() {
+        return teRepository.findByType("Global");
       }
       
       public List<Temperature_evolution> getCarbonData() {
