@@ -152,4 +152,4 @@ const options = {
 };
 
 
-export default Visual2;
+export default Visual3;
