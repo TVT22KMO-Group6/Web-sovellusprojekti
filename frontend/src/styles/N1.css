@@ -42,6 +42,12 @@
   display: inline-block;
   margin: 10px 0;
 }
+.content-N1 p,
+.content-N1 br {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: 6px;
+}
 
 @media (min-width: 600px) {
   .content-N1 {
