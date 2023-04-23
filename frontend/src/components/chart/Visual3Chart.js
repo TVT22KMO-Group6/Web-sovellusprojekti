@@ -8,13 +8,16 @@ import 'chartjs-adapter-luxon';
 Chart.register(LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend);
 
 const sortDataByType = (a, b) => {
-    return a.x - b.x;
+  const n = a.year - b.year;
+  if (n !== 0) {
+    return n;
+  }
 };
 
 const Visual3 = () => {
   const [GlobalData, setGlobalArray] = useState([]);
   const [CarbonData, setCarbonArray] = useState([]);
- // const [EventData, setEventArray] = useState([]);
+  //const [EventData, setEventArray] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,40 +29,42 @@ const Visual3 = () => {
         ] = await Promise.all([
           axios.get(process.env.REACT_APP_VISUAL_3_GLOBAL_API_URL),
           axios.get(process.env.REACT_APP_VISUAL_3_CARBON_API_URL),
-        //  axios.get(process.env.REACT_APP_VISUAL_3_EVENT_API_URL),
+       //   axios.get(process.env.REACT_APP_VISUAL_3_EVENT_API_URL),
         ]);
   
         setGlobalArray(
           GlobalDataResponse.data
+          .sort(sortDataByType)
             .map((global) => {
               return {
-                x: DateTime.fromObject({ year: global.year}),
+                x: DateTime.fromObject({ year: global.year/1000}),
                 y: global.data,
               };
             })
-            .sort(sortDataByType)
+            
         );
     
         setCarbonArray(
           CarbonDataResponse.data
+          .sort(sortDataByType)
             .map((carbon) => {
               return {
-                x: DateTime.fromObject({ year: carbon.year}),
+                x: DateTime.fromObject({ year: carbon.year/1000}),
                 y: carbon.data,
               };
             })
-            .sort(sortDataByType)
+            
         );
     
-       /* setEventArray(
+     /*   setEventArray(
           EventDataResponse.data
+          .sort(sortDataByType)
             .map((event) => {
               return {
-                x: DateTime.fromObject({ year: event.year}),
+                x: DateTime.fromObject({ year: event.year/1000}),
                 y: event.data,
               };
             })
-            .sort(sortDataByType)
         ); */
       } catch (error) {
         alert(error.response.data.error);
@@ -77,24 +82,26 @@ const Visual3 = () => {
           data: GlobalData,
           borderColor: 'rgb(0, 0, 0)',
           backgroundColor: 'rgb(0, 0, 0, 0.5)',
-          pointRadius: 1,
-        pointHitRadius: 20,
+          pointRadius: 0,
+        pointHitRadius: 1,
+        yAxisID: "y1"
         },
         {
           label: 'Carbon Data',
           data: CarbonData,
           borderColor: 'rgb(255, 0, 0)',
           backgroundColor: 'rgb(255, 0, 0, 0.5)',
-          pointRadius: 1,
-        pointHitRadius: 20,
+          pointRadius: 0,
+        pointHitRadius: 1,
+        yAxisID: "y"
         },
       /*  {
           label: 'Events',
           data: EventData,
           borderColor: 'rgb(255, 200, 0)',
           backgroundColor: 'rgb(255, 200, 0, 0.5)',
-          pointRadius: 1,
-        pointHitRadius: 20,
+          pointRadius: 0,
+        pointHitRadius: 1,
         }, */
       ],
     };
@@ -116,10 +123,11 @@ const Visual3 = () => {
               text: "Years",
             },
             ticks:{
-                stepSize: 50
+                stepSize: 1
             }
       
           },
+
           y: {
             type: "linear",
             position: "left",
@@ -133,6 +141,7 @@ const Visual3 = () => {
             stepSize: 5
         },
           },
+
           y1: {
             type: "linear",
             position: "right",
@@ -147,10 +156,16 @@ const Visual3 = () => {
             }
           },
         },
+
           plugins: {
             tooltip: {
               mode: 'x',
               intersect: false,
+              callbacks: {
+                title: function(context) {
+                  return 'test';
+                }
+              }
             },
             title: {
               display: true,
