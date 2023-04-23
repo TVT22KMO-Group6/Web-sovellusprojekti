@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import '../styles/N3.css';
 import natureImage from '../images/nature3.jpg';
 import Visual1 from '../components/chart/Visual1Chart';
@@ -22,18 +22,21 @@ function N3() {
 
   const handleVisual4Change = (event) => {
     setVisual4Visible(event.target.checked);
+
   }
 
   const handleVisual5Change = (event) => {
     setVisual5Visible(event.target.checked);
   }
 
+  
+
   return (
     <main role="main" class="container-fluid">
       <div className="background-image" style={{ backgroundImage: `url(${natureImage})` }}></div>
       <div className="content-wrapper">
         <div className="content-N3">
-          <h1>test1</h1>
+          <h1>User</h1>
         </div>
         <div className="visual-checkboxes">
           <label>
@@ -53,8 +56,7 @@ function N3() {
             Visual5
           </label>
         </div>
-        <div className="content-N3">
-        </div>
+        
         {visual1Visible && <div className="visual1-container"><Visual1 /></div>}
         {visual2Visible && <div className="visual2-container"><Visual2 /></div>}
         {visual4Visible && <div className="visual4-container"><Visual4 /></div>}

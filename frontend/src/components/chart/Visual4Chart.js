@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import { Line } from "react-chartjs-2";
 import Select from "react-select";
 
 export default function Visual4Chart() {
   const [chartData, setChartData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +34,9 @@ export default function Visual4Chart() {
       console.log("USA emissions:", usaEmissions);
     };
     fetchData();
+
+ 
+    
   }, []);
 
   const countries = Array.from(chartData.keys()).map((country) => ({
@@ -40,19 +44,25 @@ export default function Visual4Chart() {
     value: country,
   }));
 
+ 
+
   const data = {
-    datasets: selectedCountries.map((country) => ({
+    datasets: selectedCountries.map((country) => {
+      const color = `rgba(${Math.random() * 255}, ${
+        Math.random() * 255
+      }, ${Math.random() * 255}, 0.5)`;
+    
+      return{
       label: country,
       data: chartData.get(country),
-      backgroundColor: `rgba(${Math.random() * 255}, ${
-        Math.random() * 255
-      }, ${Math.random() * 255}, 0.5)`,
+      borderColor: color,
+      backgroundColor: color,
       parsing: {
         xAxisKey: "year",
         yAxisKey: "emissions",
       },
       pointRadius: 1,
-    })),
+    }}),
   };
 
   const options = {
@@ -86,8 +96,13 @@ export default function Visual4Chart() {
   };
 
   return (
-    <div style={{ width: "50%" }}>
+    
+
+  <div style={{ width: "100%", height: "80vh" }}>
+      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+  
       <h1>LineChart</h1>
+     
       <Select
         isMulti
         value={selectedCountries.map((country) => ({
@@ -98,14 +113,10 @@ export default function Visual4Chart() {
         onChange={(selectedOptions) =>
           setSelectedCountries(selectedOptions.map((option) => option.value))
         }
-        styles={{
-          control: (provided) => ({
-            ...provided,
-            width: "100%",
-          }),
-        }}
+        
       />
       <Line options={options} data={data} />
+    </div>
     </div>
   );
 }
