@@ -5,6 +5,19 @@ const Register = ({ isOpen, closeModal }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const loginUser = async (username, password) => {
+    const response = await fetch(process.env.REACT_APP_LOGIN_USER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      localStorage.setItem('token', data.jwt);
+      window.location.href = '/dashboard';
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,12 +32,12 @@ const Register = ({ isOpen, closeModal }) => {
           password,
         }),
       });
-  
+
       if (response.status === 201) {
         alert('Registration successful!');
         setUsername('');
         setPassword('');
-        closeModal();
+        loginUser(username, password); // Log the user in after successful registration
       } else {
         throw new Error(`Request failed with status ${response.status}`);
       }
