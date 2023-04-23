@@ -7,6 +7,7 @@ import Visual2 from './components/chart/Visual2Chart';
 import Visual1 from './pages/Visual1';
 import Visual5 from './components/chart/Visual5Chart';
 import Visual4 from './pages/Visual4';
+import Visual3 from './pages/Visual3';
 import Nav1 from './pages/Nav1';
 import Nav2 from './pages/Nav2';
 import Nav3 from './pages/Nav3';
@@ -42,7 +43,7 @@ function App() {
         <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> }/>
         <Route path="/visual1" element={<Visual1 />} />
         <Route path="/visual2" element={<Visual2 />} />
-
+        <Route path="/visual3" element={<Visual3 />} />
         <Route path="/visual4" element={<Visual4 />} />
         <Route path="/visual5" element={<Visual5 />} />
         <Route path="/" element={<Frontpage />} />
