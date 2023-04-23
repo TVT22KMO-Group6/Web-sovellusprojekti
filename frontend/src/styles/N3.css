@@ -1,5 +1,50 @@
-.content {
+
+  
+.content-N3 {
+  margin: 60px 5%;
   position: relative;
+
 }
-  
-  
+
+
+.visual-container {
+  position: absolute;
+  margin: 50px 5%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+  width: 10%;
+}
+
+.content-N3 h1 {
+  width: auto;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: 6px;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+
+
+.visual1-container,
+.visual2-container,
+.visual3-container,
+.visual4-container{
+  margin: 50px 5%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+  width: 90%;
+}
+.visual5-container{
+  margin: 50px 5%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+  width: 70%;
+}
