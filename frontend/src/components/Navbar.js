@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
-import ClimateStatsLogo from '../images/climatestatslogo2.png';
+import ClimateStatsLogo from '../images/climatestatslogo3.png';
 import deleteUser from './user/DeleteUser';
 
 const Navbar = ({ openRegisterModal, openLoginModal }) => {
@@ -16,7 +16,7 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
   };
   
   return (
-    <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top px-3">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top px-3">
       <a className="navbar-logo" href="/">
         <img src={ClimateStatsLogo} alt="ClimateStats" className="logo-image" />
       </a>

@@ -6,6 +6,12 @@ const deleteUser = async () => {
       return;
     }
     
+    const userConfirmation = window.confirm('Are you sure you want to delete your account? This action cannot be undone.');
+
+    if (!userConfirmation) {
+      return;
+    }
+
     const response = await fetch(`${process.env.REACT_APP_DELETE_USER_URL}`, {
       method: 'DELETE',
       headers: {
