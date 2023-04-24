@@ -191,7 +191,19 @@ const Visual1Chart = () => {
     };
   
     return (
-      <div style={{ width: '95%' }}>
+      <div>
+        <h1>
+          Global historical surface temperature anomalies from January 1850 onwards
+        </h1>
+          <p>
+            Line graph of global surface temperature variations covering a period of 170 years and
+            from the northern hemisphere for a period of 2000 years.<br/>
+            Hadley Centre<a href="https://www.metoffice.gov.uk/hadobs/hadcrut5"> data & description.</a><br/>
+            Bolin Centre<a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt"> data.</a><br/>
+            Bolin Centre <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005">data description.</a><br/>
+            <a href="https://www.nature.com/articles/nature03265">Full study</a><br/>
+          </p>
+      <div style={{ width: '100%' }}>
         <div className='container-visual-radios'>
           <div className='radio'>
           <input type='radio' id='annual' name='timeframe' defaultChecked onClick={TimeframeAnnual}/>
@@ -204,6 +216,7 @@ const Visual1Chart = () => {
         </div>
         {timeframe === "Annual" && <Line data={annualData} options={options} />}
         {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
+      </div>
       </div>
     );
   };
