@@ -3,6 +3,7 @@ import '../styles/N1.css';
 import natureImage from '../images/nature1.jpg';
 import Visual1 from '../components/chart/Visual1Chart';
 import Visual2 from '../components/chart/Visual2Chart';
+import Visual3 from '../components/chart/Visual3Chart';
 
 function N1() {
   return (
@@ -35,6 +36,12 @@ function N1() {
         <div className="visual2-container">
           <Visual2 />
         </div>
+        <div className="content-N1">
+        <h1>Evolution of global temperature over the past two million years</h1>
+      </div>
+      <div className="visual3-container">
+        <Visual3 />
+      </div>
       </div>
       </div>
     </main>

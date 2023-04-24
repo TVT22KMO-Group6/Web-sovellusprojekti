@@ -31,4 +31,9 @@ public class Visual3Controller {
     public List<Temperature_evolution> getCarbonData() {
         return visual3Service.getCarbonData();
     }
+
+    @GetMapping("/eventtext")
+    public List<Temperature_evolution> getEventData() {
+        return visual3Service.getEventData();
+    }
 }
