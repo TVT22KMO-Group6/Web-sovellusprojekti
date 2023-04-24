@@ -182,11 +182,14 @@ const Visual3 = () => {
       
   
     return (
+      <div>
+        <h1>Evolution of global temperature over the past two million years</h1>
         <div style={{ width: "100%", height: "80vh" }}>
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <Line data={data} options={options} />
           </div>
         </div>
+      </div>
       );
     };
     
