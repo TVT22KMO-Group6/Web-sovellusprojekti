@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useImmerReducer } from 'use-immer';
-import UserVisualList from '../components/user/visual/UserVisualList';
+import UserVisualList from '../components/user/UserVisualList';
 
 function userVisualsReducer(draft, action) {
   switch (action.type) {

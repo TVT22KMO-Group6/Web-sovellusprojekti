@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 import './styles/App.css';
 import Frontpage from './pages/Frontpage';
 import Navbar from './components/Navbar';
@@ -14,7 +14,9 @@ import Nav3 from './pages/Nav3';
 import ProtectedRoute from './components/ProtectedRoute';
 import RegisterModal from './components/user/Register';
 import LoginModal from './components/user/Login';
+import UserVisual from './pages/UserVisual';
 import Dashboard from './pages/Dashboard';
+import AddUserVisual from './pages/AddUserVisual';
 
 function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -41,17 +43,17 @@ function App() {
               openLoginModal={openLoginModal} />
       <Routes>
         <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> }/>
+        <Route path="/user/visual/new" element={ <ProtectedRoute> <AddUserVisual /> </ProtectedRoute> }/>
         <Route path="/visual1" element={<Visual1 />} />
         <Route path="/visual2" element={<Visual2 />} />
         <Route path="/visual3" element={<Visual3 />} />
         <Route path="/visual4" element={<Visual4 />} />
         <Route path="/visual5" element={<Visual5 />} />
-        <Route path="/" element={<Frontpage />} />
         <Route path="/N1" element={<Nav1 />} />
         <Route path="/N2" element={<Nav2 />} />
         <Route path="/N3" element={<Nav3 />} />
-
-
+        <Route path="/:url" element={<UserVisual />} />
+        <Route path="/" element={<Frontpage />} />
       </Routes>
       <RegisterModal isOpen={isRegisterModalOpen} closeModal={closeRegisterModal} />
       <LoginModal isOpen={isLoginModalOpen} closeModal={closeLoginModal} />
