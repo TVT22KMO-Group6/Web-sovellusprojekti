@@ -3,7 +3,7 @@ import Visual1Chart from '../components/chart/Visual1Chart';
 
 function Visual1() {
   return (
-    <main role="main" class="container-fluid">
+    <main role="main" className="container-fluid">
       <Visual1Chart/>
     </main>
   );

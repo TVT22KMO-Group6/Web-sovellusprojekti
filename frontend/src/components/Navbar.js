@@ -34,9 +34,12 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
             </div>
           </li>
         </ul>
-        <ul class="navbar-nav ms-auto">
+        <ul className="navbar-nav ms-auto">
         {isLoggedIn() ? (
           <React.Fragment>
+            <li className="nav-item">
+              <a className="nav-link" href="/dashboard">Dashboard</a>
+            </li>
             <li className="nav-item">
               <a className="nav-link" href="#" onClick={deleteUser}>Delete Account</a>
             </li>
@@ -55,36 +58,7 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
             </React.Fragment>
           )}
         </ul>
-        
       </div>
-    {/*<div className="navbar">
-      <div className='homepage'>
-      <Link to="/" className="nav-link logo">
-       <img src={ClimateStatsLogo} alt="ClimateStats" className="logo-image" />
-      </Link>
-        <Dropdown className="custom-dropdown">
-          <Dropdown.Toggle id="dropdown-basic">
-            Views
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item as={Link} to="/N1">N1</Dropdown.Item>
-            <Dropdown.Item as={Link} to="/N2">N2</Dropdown.Item>
-            <Dropdown.Item as={Link} to="/N3">N3</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
-      <div className="nav-links">
-  {isLoggedIn() ? (
-    <button className="nav-link-button" onClick={logout}>Logout</button>
-  ) : (
-    <React.Fragment>
-      <button className="nav-link-button" onClick={openLoginModal}>Login</button>
-      <button className="nav-link-button" onClick={openRegisterModal}>Register</button>
-    </React.Fragment>
-  )}
-</div>
-  </div>*/}
     </nav>
   );
 };

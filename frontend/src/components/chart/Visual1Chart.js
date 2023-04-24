@@ -207,5 +207,5 @@ const Visual1Chart = () => {
       </div>
     );
   };
-//<Line options={options} data={timeframe === "Annual" ? annualData : monthlyData} />
-  export default Visual1Chart;
+
+export default Visual1Chart;
