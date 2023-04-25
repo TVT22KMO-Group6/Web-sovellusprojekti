@@ -1,5 +1,5 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
+import { React, createRef, useRef } from 'react';
+import { Line, getElementsAtEvent, getDatasetAtEvent } from 'react-chartjs-2';
 import { useState, useEffect, useMemo } from 'react';
 import { DateTime } from 'luxon';
 
@@ -14,7 +14,7 @@ const sortMonthlyData = (a, b) => {
   return a.time.localeCompare(b.time);
 };
 
-const Visual1Chart = () => {
+const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData}) => {
   const [timeframe, setTimeframe] = useState("Annual");
   const [globalAnnualData, setGlobalAnnualData] = useState([]);
   const [northAnnualData, setNorthAnnualData] = useState([]);
@@ -45,7 +45,7 @@ const Visual1Chart = () => {
   }, [globalAnnualData, northAnnualData, southAnnualData, reconstructionData, globalMonthlyData, northMonthlyData, southMonthlyData]);
 
   useEffect(() => {
-    setTimeframe(timeframe);
+    //setTimeframe(timeframe);
     const fetchData = async () => {
       const response = await fetch(process.env.REACT_APP_VISUAL_1_API_URL);
       const json = await response.json();
@@ -82,7 +82,7 @@ const Visual1Chart = () => {
     }
 
     fetchData().catch(console.error);
-  }, [timeframe])
+  }, [])
 
   const TimeframeAnnual = () => {
     setTimeframe("Annual");
@@ -116,7 +116,8 @@ const Visual1Chart = () => {
           label: 'Reconstruction',
           data: filteredData.Reconstruction.Annual,
           borderColor: 'rgb(0, 126, 255)',
-          backgroundColor: 'rgb(0, 126, 255, 0.5)'
+          backgroundColor: 'rgb(0, 126, 255, 0.5)',
+          hidden: true
         }
       ],
     };
@@ -189,34 +190,45 @@ const Visual1Chart = () => {
         }
       },
     };
-  
+
     return (
-      <div>
-        <h1>
-          Global historical surface temperature anomalies from January 1850 onwards
-        </h1>
-          <p>
-            Line graph of global surface temperature variations covering a period of 170 years and
-            from the northern hemisphere for a period of 2000 years.<br/>
-            Hadley Centre<a href="https://www.metoffice.gov.uk/hadobs/hadcrut5"> data & description.</a><br/>
-            Bolin Centre<a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt"> data.</a><br/>
-            Bolin Centre <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005">data description.</a><br/>
-            <a href="https://www.nature.com/articles/nature03265">Full study</a><br/>
-          </p>
-      <div style={{ width: '100%' }}>
-        <div className='container-visual-radios'>
-          <div className='radio'>
-          <input type='radio' id='annual' name='timeframe' defaultChecked onClick={TimeframeAnnual}/>
-          <label htmlFor='annual'>Annual</label>
-          </div>
-          <div className='radio'>
-          <input type='radio' id='monthly' name='timeframe' onClick={TimeframeMonthly} />
-            <label htmlFor='monthly'>Monthly</label>
+      <div className='visual1-container'>
+        <div>
+          <h1>
+            Global historical surface temperature anomalies from January 1850 onwards
+          </h1>
+            <p>
+              Line graph of global surface temperature variations covering a period of 170 years and
+              from the northern hemisphere for a period of 2000 years.<br/>
+              Hadley Centre<a href="https://www.metoffice.gov.uk/hadobs/hadcrut5"> data & description.</a><br/>
+              Bolin Centre<a href="https://www.ncei.noaa.gov/pub/data/paleo/contributions_by_author/moberg2005/nhtemp-moberg2005.txt"> data.</a><br/>
+              Bolin Centre <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005">data description.</a><br/>
+              <a href="https://www.nature.com/articles/nature03265">Full study</a><br/>
+            </p>
+          <div style={{ width: '100%' }}>
+            <div className='container-visual-radios'>
+              <div className='radio'>
+              <input type='radio' className='form-check-input' id='annual' name='timeframe' defaultChecked onClick={TimeframeAnnual}/>
+              <label htmlFor='annual'>Annual</label>
+              </div>
+              <div className='radio'>
+              <input type='radio' className='form-check-input' id='monthly' name='timeframe' onClick={TimeframeMonthly} />
+                <label htmlFor='monthly'>Monthly</label>
+              </div>
+            </div>
+            <div className='visual1-chart-content'>
+              {timeframe === "Annual" && <Line data={annualData} options={options} />}
+              {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
+            </div>
+            <label>Description</label>
+            <textarea
+              disabled={userVisualOptions != null || !addingNewUserView}
+              className="form-control"
+              defaultValue={userVisualOptions || "Temperature Anomaly Analysis"}
+              onChange={e=> handleSetVisualData(1, e.target.value)}>
+            </textarea>
           </div>
         </div>
-        {timeframe === "Annual" && <Line data={annualData} options={options} />}
-        {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
-      </div>
       </div>
     );
   };

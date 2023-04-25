@@ -23,9 +23,17 @@ public class UserVisualsService {
         return userVisualizationRepository.findById(id);
     }
 
+    public UserVisualization getByUrl(String url) {
+        return userVisualizationRepository.findByUrl(url);
+    }
+
     public List<UserVisualization> getUserVisuals(String username) {
         User user = userRepository.findByUsername(username);
         return userVisualizationRepository.findByUserId(user.getId());
+    }
+
+    public UserVisualization saveUserVisual(UserVisualization userVisual) {
+        return userVisualizationRepository.save(userVisual);
     }
 
     public void deleteUserVisualById(Long id) {
