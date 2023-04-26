@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/N2.css'
 import natureImage from '../images/nature2.jpg';
 import Visual4 from '../components/chart/Visual4Chart';
 import Visual5 from '../components/chart/Visual5Chart';

@@ -17,7 +17,7 @@ const Visual2 = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [
+        const [   
           maunaLoaMonthlyResponse,
           maunaLoaAnnualResponse,
           iceCore1Response,
@@ -181,7 +181,7 @@ const options = {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div>
         <div>
           <h1>
             Atmospheric CO<sub>2</sub> concentrations from Mauna Loa measurements starting 1958 and
