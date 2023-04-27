@@ -6,4 +6,5 @@ import java.util.List;
 public interface Temperature_evolutionRepository extends JpaRepository<Temperature_evolution, Integer> {
      List<Temperature_evolution> findAll();
      List<Temperature_evolution> findByType(String type);
+     // List<Temperature_evolution> findByEventText(String eventtext);
 }

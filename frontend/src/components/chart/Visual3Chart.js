@@ -7,17 +7,27 @@ import 'chartjs-adapter-luxon';
 
 Chart.register(LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend);
 
-const sortDataByType = (a, b) => {
+const sortDataByYear = (a, b) => {
   const n = a.year - b.year;
   if (n !== 0) {
     return n;
   }
 };
 
+const getYearRegex = function(string) {
+  const regexp = /^.*?\. (\d+)/;
+  const regexp2 = /^.*?, (\d+)/;
+  const match = string.match(regexp);
+  if ( match == null ){
+    match = string.match(regexp2);
+  }
+  return "Year: " + match[1] * 1000;
+}
+
 const Visual3 = () => {
   const [GlobalData, setGlobalArray] = useState([]);
   const [CarbonData, setCarbonArray] = useState([]);
-  //const [EventData, setEventArray] = useState([]);
+  // const [EventData, setEventArray] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,46 +35,45 @@ const Visual3 = () => {
         const [
           GlobalDataResponse,
           CarbonDataResponse,
-       //   EventDataResponse,
+        //  EventDataResponse,
         ] = await Promise.all([
           axios.get(process.env.REACT_APP_VISUAL_3_GLOBAL_API_URL),
           axios.get(process.env.REACT_APP_VISUAL_3_CARBON_API_URL),
-       //   axios.get(process.env.REACT_APP_VISUAL_3_EVENT_API_URL),
+         // axios.get(process.env.REACT_APP_VISUAL_3_EVENT_API_URL),
         ]);
   
         setGlobalArray(
           GlobalDataResponse.data
-          .sort(sortDataByType)
+          .sort(sortDataByYear)
             .map((global) => {
               return {
-                x: DateTime.fromObject({ year: global.year/1000}),
+                x: DateTime.fromObject({ year: global.year / 1000}),
                 y: global.data,
               };
             })
-            
         );
     
         setCarbonArray(
           CarbonDataResponse.data
-          .sort(sortDataByType)
+          .sort(sortDataByYear)
             .map((carbon) => {
               return {
-                x: DateTime.fromObject({ year: carbon.year/1000}),
+                x: DateTime.fromObject({ year: carbon.year / 1000}),
                 y: carbon.data,
               };
             })
-            
         );
     
-     /*   setEventArray(
+       /* setEventArray(
           EventDataResponse.data
-          .sort(sortDataByType)
+          .sort(sortDataByYear)
             .map((event) => {
               return {
-                x: DateTime.fromObject({ year: event.year/1000}),
+                x: DateTime.fromObject({ year: event.year / 1000}),
                 y: event.data,
               };
             })
+            
         ); */
       } catch (error) {
         alert(error.response.data.error);
@@ -84,7 +93,7 @@ const Visual3 = () => {
           backgroundColor: 'rgb(0, 0, 0, 0.5)',
           pointRadius: 0,
         pointHitRadius: 1,
-        yAxisID: "y1"
+        yAxisID: 'y1',
         },
         {
           label: 'Carbon Data',
@@ -93,15 +102,16 @@ const Visual3 = () => {
           backgroundColor: 'rgb(255, 0, 0, 0.5)',
           pointRadius: 0,
         pointHitRadius: 1,
-        yAxisID: "y"
+        yAxisID: 'y',
         },
-      /*  {
+       /* {
           label: 'Events',
           data: EventData,
           borderColor: 'rgb(255, 200, 0)',
           backgroundColor: 'rgb(255, 200, 0, 0.5)',
           pointRadius: 0,
         pointHitRadius: 1,
+        showLine: false
         }, */
       ],
     };
@@ -116,18 +126,17 @@ const Visual3 = () => {
             type: 'time',
             time: {
               unit: 'year',
-            },
+          },
             position: 'bottom',
+            reverse: true,
             title:{
               display: true,
-              text: "Years",
+              text: "",
             },
             ticks:{
                 stepSize: 1
             }
-      
           },
-
           y: {
             type: "linear",
             position: "left",
@@ -139,9 +148,8 @@ const Visual3 = () => {
           max: 290,
           ticks:{
             stepSize: 5
-        },
+            },
           },
-
           y1: {
             type: "linear",
             position: "right",
@@ -156,14 +164,13 @@ const Visual3 = () => {
             }
           },
         },
-
           plugins: {
             tooltip: {
               mode: 'x',
               intersect: false,
               callbacks: {
                 title: function(context) {
-                  return 'test';
+                  return getYearRegex(context[0].label);
                 }
               }
             },
