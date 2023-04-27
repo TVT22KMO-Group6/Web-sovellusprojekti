@@ -24,4 +24,9 @@ public class Visual3Service {
       public List<Temperature_evolution> getCarbonData() {
         return teRepository.findByType("Carbon");
       }
+
+     /*  public List<Temperature_evolution> getEventTextData() {
+        return teRepository.findByEventText("null");
+      } */
+      
 }
