@@ -62,7 +62,7 @@ const Visual5 = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -87,7 +87,7 @@ const Visual5 = () => {
 
   const subsectorOptions = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
@@ -101,13 +101,15 @@ const Visual5 = () => {
   };
 
   return (
-    <div>
-      {displayedChart === 'sector' ? (
-        <Doughnut key={chartKey} data={sectorData} options={options} />
-      ) : (
-        <Doughnut key={chartKey} data={subSectorData} options={subsectorOptions} />
-      )}
-    </div>
+
+      <div className="chart-container">
+        {displayedChart === 'sector' ? (
+          <Doughnut key={chartKey} data={sectorData} options={options} />
+        ) : (
+          <Doughnut key={chartKey} data={subSectorData} options={subsectorOptions} />
+        )}
+      </div>
+
   );
 };
 

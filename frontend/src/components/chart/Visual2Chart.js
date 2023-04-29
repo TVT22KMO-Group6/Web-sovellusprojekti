@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { DateTime } from 'luxon';
-import { Chart, LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
-import 'chartjs-adapter-luxon';
-
-Chart.register(LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend);
 
 const sortDataByDate = (a, b) => {
   return a.x - b.x;
@@ -21,7 +17,7 @@ const Visual2 = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [
+        const [   
           maunaLoaMonthlyResponse,
           maunaLoaAnnualResponse,
           iceCore1Response,
@@ -148,9 +144,7 @@ const Visual2 = () => {
 
 const options = {
   responsive: true,
-  maintainAspectRatio: false,
   scales: {
-
     x: {
       type: 'time',
       time: {
@@ -161,7 +155,6 @@ const options = {
         display: true,
         text: "Date",
       }
-
     },
     y: {
       type: "linear",
@@ -181,9 +174,6 @@ const options = {
         display: true,
         text: 'Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurements',
       },
-      legend: {
-        display: true,
-      },
     },
     adapters: {
       date: { id: 'luxon', DateTime },
@@ -191,11 +181,23 @@ const options = {
   };
 
   return (
-    <div style={{ width: "100%", height: "80vh" }}>
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div>
+        <div>
+          <h1>
+            Atmospheric CO<sub>2</sub> concentrations from Mauna Loa measurements starting 1958 and
+            Antarctic Ice Core records of atmospheric CO<sub>2</sub> ratios covering a period of 1000 years.
+          </h1><br/>
+              <p>
+                Based on Mauna Loa measurements and Antarctic ice cores.<br/>
+                Mauna Loa<a href="https://gml.noaa.gov/ccgg/trends"> data.</a><br/>
+                Mauna Loa <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html">data description.</a><br/>
+                Law Dome<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.da"> data.</a><br/>
+                Law Dome <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html">data description.</a><br/>
+              </p>
+        </div>
         <Line data={data} options={options} />
       </div>
-    </div>
+
   );
 };
 
