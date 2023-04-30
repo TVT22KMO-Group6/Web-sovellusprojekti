@@ -3,7 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart, DoughnutController, ArcElement } from 'chart.js';
 Chart.register (DoughnutController, ArcElement );
 
-const Visual5 = () => {
+const Visual5 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) => {
   const [emissionData, setEmissionData] = useState([]);
   const [subEmissionData, setSubsectorData] = useState([]);
   const [displayedChart, setDisplayedChart] = useState('sector');
@@ -101,14 +101,22 @@ const Visual5 = () => {
   };
 
   return (
-
-      <div className="chart-container">
+      <div>
+        <div className="visual5-container">
         {displayedChart === 'sector' ? (
           <Doughnut key={chartKey} data={sectorData} options={options} />
         ) : (
           <Doughnut key={chartKey} data={subSectorData} options={subsectorOptions} />
         )}
+        </div>
+        <textarea
+          disabled={userVisualOptions != null || !addingNewUserView}
+          className="form-control"
+          defaultValue={userVisualOptions || "CO2 Emissions by Sectors"}
+          onChange={e=> handleSetVisualData(5, e.target.value)}>
+        </textarea>
       </div>
+      
 
   );
 };
