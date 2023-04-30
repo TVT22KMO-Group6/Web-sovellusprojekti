@@ -96,10 +96,8 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
   };
 
   return (
-    
 
-  <div style={{ width: "100%", height: "80vh" }}>
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
   
       <h1>LineChart</h1>
      
@@ -123,6 +121,6 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
         onChange={e=> handleSetVisualData(4, e.target.value)}>
       </textarea>
     </div>
-    </div>
+
   );
 }
