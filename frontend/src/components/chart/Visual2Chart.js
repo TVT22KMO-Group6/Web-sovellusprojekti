@@ -7,7 +7,7 @@ const sortDataByDate = (a, b) => {
   return a.x - b.x;
 };
 
-const Visual2 = () => {
+const Visual2 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) => {
   const [maunaLoaMonthly, setmaunaArray] = useState([]);
   const [maunaLoaAnnual, setmaunaArrayM] = useState([]);
   const [iceCore1, seticeCore1Array] = useState([]);
@@ -199,6 +199,13 @@ const options = {
               </p>
         </div>
         <Line data={data} options={options} />
+        <label>Description</label>
+        <textarea
+          disabled={userVisualOptions != null || !addingNewUserView}
+          className="form-control"
+          defaultValue={userVisualOptions || "Atmospheric CO2 concentrations"}
+          onChange={e=> handleSetVisualData(2, e.target.value)}>
+        </textarea>
       </div>
 
   );

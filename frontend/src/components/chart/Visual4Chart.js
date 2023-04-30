@@ -2,7 +2,7 @@ import React, { useState, useEffect, } from "react";
 import { Line } from "react-chartjs-2";
 import Select from "react-select";
 
-export default function Visual4Chart() {
+export default function Visual4Chart({userVisualOptions, addingNewUserView, handleSetVisualData}) {
   const [chartData, setChartData] = useState([]);
   const [selectedCountries, setSelectedCountries] = useState([]);
 
@@ -114,6 +114,12 @@ export default function Visual4Chart() {
         
       />
       <Line options={options} data={data} />
+      <textarea
+        disabled={userVisualOptions != null || !addingNewUserView}
+        className="form-control"
+        defaultValue={userVisualOptions || "Emission data by country"}
+        onChange={e=> handleSetVisualData(4, e.target.value)}>
+      </textarea>
     </div>
 
   );

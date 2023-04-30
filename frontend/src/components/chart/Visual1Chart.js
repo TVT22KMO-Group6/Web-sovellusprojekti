@@ -45,7 +45,6 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
   }, [globalAnnualData, northAnnualData, southAnnualData, reconstructionData, globalMonthlyData, northMonthlyData, southMonthlyData]);
 
   useEffect(() => {
-    //setTimeframe(timeframe);
     const fetchData = async () => {
       const response = await fetch(process.env.REACT_APP_VISUAL_1_API_URL);
       const json = await response.json();
@@ -147,7 +146,6 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
   
     const options = {
       responsive: true,
-      animation: false,
       plugins: {
         tooltip: {
           mode: 'index',
@@ -192,7 +190,6 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
     };
 
     return (
-      <div>
         <div>
           <h1>
             Global historical surface temperature anomalies from January 1850 onwards
@@ -205,8 +202,7 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
               Bolin Centre <a href="https://bolin.su.se/data/moberg-2012-nh-1?n=moberg-2005">data description.</a><br/>
               <a href="https://www.nature.com/articles/nature03265">Full study</a><br/>
             </p>
-          <div style={{ width: '100%' }}>
-            <div className='container-visual-radios'>
+            <div>
               <div className='radio'>
               <input type='radio' className='form-check-input' id='annual' name='timeframe' defaultChecked onClick={TimeframeAnnual}/>
               <label htmlFor='annual'>Annual</label>
@@ -216,12 +212,8 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
                 <label htmlFor='monthly'>Monthly</label>
               </div>
             </div>
-            <div className='visual1-chart-content'>
-              <div className="chartstyle">
-                {timeframe === "Annual" && <Line data={annualData} options={options} />}
-                {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
-              </div>
-            </div>
+            {timeframe === "Annual" && <Line data={annualData} options={options} />}
+            {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
             <label>Description</label>
             <textarea
               disabled={userVisualOptions != null || !addingNewUserView}
@@ -229,9 +221,7 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
               defaultValue={userVisualOptions || "Temperature Anomaly Analysis"}
               onChange={e=> handleSetVisualData(1, e.target.value)}>
             </textarea>
-          </div>
         </div>
-      </div>
     );
   };
 
