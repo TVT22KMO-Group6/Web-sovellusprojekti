@@ -96,10 +96,8 @@ export default function Visual4Chart() {
   };
 
   return (
-    
 
-  <div style={{ width: "100%", height: "80vh" }}>
-      <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
   
       <h1>LineChart</h1>
      
@@ -117,6 +115,6 @@ export default function Visual4Chart() {
       />
       <Line options={options} data={data} />
     </div>
-    </div>
+
   );
 }

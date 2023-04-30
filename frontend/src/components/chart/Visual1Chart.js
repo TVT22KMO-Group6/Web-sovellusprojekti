@@ -192,7 +192,7 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
     };
 
     return (
-      <div className='visual1-container'>
+      <div>
         <div>
           <h1>
             Global historical surface temperature anomalies from January 1850 onwards
@@ -217,8 +217,10 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
               </div>
             </div>
             <div className='visual1-chart-content'>
-              {timeframe === "Annual" && <Line data={annualData} options={options} />}
-              {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
+              <div className="chartstyle">
+                {timeframe === "Annual" && <Line data={annualData} options={options} />}
+                {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
+              </div>
             </div>
             <label>Description</label>
             <textarea

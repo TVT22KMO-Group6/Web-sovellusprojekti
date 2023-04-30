@@ -122,6 +122,7 @@ const Visual2 = () => {
     backgroundColor: 'rgba(102, 0, 51, 0.5)',
     pointRadius: 3,
     pointHitRadius: 20,
+    hidden: true,
   },
   {
     label: 'Ice Core 2',
@@ -130,6 +131,7 @@ const Visual2 = () => {
     backgroundColor: 'rgba(51, 51, 153, 0.5)',
     pointRadius: 3,
     pointHitRadius: 20,
+    hidden: true,
   },
   {
     label: 'Ice Core 3',
@@ -138,6 +140,7 @@ const Visual2 = () => {
     backgroundColor: 'rgba(0, 102, 204, 0.5)',
     pointRadius: 3,
     pointHitRadius: 20,
+    hidden: true,
   },
 ],
 };
@@ -172,7 +175,7 @@ const options = {
       },
       title: {
         display: true,
-        text: 'Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurements',
+        text: 'Mauna Loa measurements combined with Antarctic Ice Core records of atmospheric CO2 ratios',
       },
     },
     adapters: {
