@@ -1,0 +1,4 @@
+.two-rows-true > div {
+    display: inline-block;
+    width: 50%;
+}
