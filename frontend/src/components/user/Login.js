@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/Login.css';
 
-const LoginModal = ({ isOpen, closeModal }) => {
+const Login = ({ isOpen, closeModal }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -35,14 +35,17 @@ const LoginModal = ({ isOpen, closeModal }) => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="modal-input" 
+                aria-label="Username *"
                 required
                 />
                 
             <h4 className="label">Password *</h4>
-                <input type="password"
+                <input
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="modal-input"
+                aria-label="Password *"
                 required
                 />
 
@@ -56,4 +59,4 @@ const LoginModal = ({ isOpen, closeModal }) => {
   );
 };
 
-export default LoginModal;
+export default Login;

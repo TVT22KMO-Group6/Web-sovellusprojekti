@@ -1,26 +1,28 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import RegisterModal from './Register';
+import Login from './Login';
 
 beforeAll(() => {
-  window.alert = jest.fn();
-});
+    // Mock window.location.href
+    delete window.location;
+    window.location = { href: jest.fn() };
+  });
 
-describe('Register component', () => {
-  test('renders register modal and submits user data', async () => {
+describe('Login component', () => {
+  test('renders login modal and submits user data', async () => {
     const mockCloseModal = jest.fn();
 
-    const { findByLabelText, findByRole } = render(<RegisterModal isOpen={true} closeModal={mockCloseModal} />);
+    const { findByLabelText, findByRole } = render(<Login isOpen={true} closeModal={mockCloseModal} />);
 
     const usernameInput = await findByLabelText('Username *');
     const passwordInput = await findByLabelText('Password *');
-    const submitButton = await findByRole('button', { name: 'Register' });
+    const submitButton = await findByRole('button', { name: 'Login' });
 
     fireEvent.change(usernameInput, { target: { value: 'testuser' } });
     fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
 
     global.fetch = jest.fn().mockResolvedValue({
-      status: 201,
+      ok: true,
       json: () => Promise.resolve({ jwt: 'fake_jwt_token' }),
     });
 
@@ -28,7 +30,7 @@ describe('Register component', () => {
 
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(global.fetch).toHaveBeenCalledWith(
-      process.env.REACT_APP_REGISTER_USER_URL,
+      process.env.REACT_APP_LOGIN_USER_URL,
       expect.objectContaining({
         method: 'POST',
         headers: {
@@ -41,5 +43,4 @@ describe('Register component', () => {
       }),
     );
   });
-
 });
