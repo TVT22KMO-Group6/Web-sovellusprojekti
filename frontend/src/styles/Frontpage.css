@@ -19,35 +19,3 @@
     opacity: 1;
   }
 }
-
-
-
-@media screen and (max-width: 600px) {
-  .content h1{
-    font-size: 14px;
-  }
-}
-
-@media screen and (min-width: 601px) {
-  .content h1{
-    font-size: 16px;
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .content h1{
-    font-size: 22px;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .content h1{
-    font-size: 30px;
-  }
-}
-
-@media screen and (min-width: 1920px) {
-  .content h1{
-    font-size: 34px;
-  }
-}
