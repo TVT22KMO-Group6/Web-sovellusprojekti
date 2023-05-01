@@ -1,35 +1,35 @@
 const deleteUser = async () => {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      console.log('Token is missing');
-      return;
-    }
-    
-    const userConfirmation = window.confirm('Are you sure you want to delete your account? This action cannot be undone.');
+  const token = localStorage.getItem('token');
 
-    if (!userConfirmation) {
-      return;
-    }
+  if (!token) {
+    console.error('Token is missing');
+    return;
+  }
 
-    const response = await fetch(`${process.env.REACT_APP_DELETE_USER_URL}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    });
-    
-    if (response.ok) {
-      console.log('User deleted successfully');
-      
-      localStorage.removeItem('token');
-      window.location.href = '/';
-    } else {
-      console.log('Error deleting the user');
-    }
-  };
-  
-  
-  export default deleteUser;
-  
+  const userConfirmation = window.confirm(
+    'Are you sure you want to delete your account? This action cannot be undone.'
+  );
+
+  if (!userConfirmation) {
+    return;
+  }
+
+  const response = await fetch(`${process.env.REACT_APP_DELETE_USER_URL}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+
+  if (response.ok) {
+    console.log('User deleted successfully');
+
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  } else {
+    console.error('Error deleting the user');
+  }
+};
+
+export default deleteUser;

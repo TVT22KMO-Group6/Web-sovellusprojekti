@@ -2,6 +2,7 @@ import deleteUser from './DeleteUser';
 
 describe('deleteUser', () => {
   let removeItemSpy;
+  let confirmSpy;
 
   beforeEach(() => {
     global.fetch = jest.fn(() =>
@@ -11,13 +12,16 @@ describe('deleteUser', () => {
       })
     );
     removeItemSpy = jest.spyOn(Storage.prototype, 'removeItem');
+    confirmSpy = jest.spyOn(window, 'confirm').mockImplementation(() => true);
   });
 
   afterEach(() => {
     removeItemSpy.mockRestore();
+    confirmSpy.mockRestore();
   });
+
+
   test('deletes user successfully', async () => {
-    // Store token in local storage
     localStorage.setItem('token', 'testToken');
 
     await deleteUser();
@@ -35,32 +39,29 @@ describe('deleteUser', () => {
   });
 
   test('does not delete user if token is missing', async () => {
-    // Remove token from local storage
     localStorage.removeItem('token');
 
-    console.log = jest.fn();
+    console.error = jest.fn();
 
     await deleteUser();
 
-    expect(console.log).toHaveBeenCalledWith('Token is missing');
+    expect(console.error).toHaveBeenCalledWith('Token is missing');
     expect(fetch).toHaveBeenCalledTimes(0);
   });
 
   test('handles error when deleting user', async () => {
-    // Update fetch mock to return an error response
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: false,
       })
     );
 
-    // Store token in local storage
     localStorage.setItem('token', 'testToken');
 
-    console.log = jest.fn();
+    console.error = jest.fn();
 
     await deleteUser();
 
-    expect(console.log).toHaveBeenCalledWith('Error deleting the user');
+    expect(console.error).toHaveBeenCalledWith('Error deleting the user');
   });
 });
