@@ -5,3 +5,63 @@
 body {
   padding-top: 5rem;
 }
+
+@media screen and (max-width: 600px) {
+  h1{
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  h1{
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  h1{
+    font-size: 22px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  h1{
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  h1{
+    font-size: 34px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  p {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  p {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  p {
+    font-size: 20px;
+  }
+}
