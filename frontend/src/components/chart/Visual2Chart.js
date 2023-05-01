@@ -3,20 +3,24 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
+// Function to sort data by date
 const sortDataByDate = (a, b) => {
   return a.x - b.x;
 };
 
 const Visual2 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) => {
+  // Define state variables
   const [maunaLoaMonthly, setmaunaArray] = useState([]);
   const [maunaLoaAnnual, setmaunaArrayM] = useState([]);
   const [iceCore1, seticeCore1Array] = useState([]);
   const [iceCore2, seticeCore2Array] = useState([]);
   const [iceCore3, seticeCore3Array] = useState([]);
 
+  // Fetch emission sectors data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch data from multiple APIs using Promise.all
         const [   
           maunaLoaMonthlyResponse,
           maunaLoaAnnualResponse,
@@ -31,6 +35,7 @@ const Visual2 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           axios.get(process.env.REACT_APP_VISUAL_2_ICE_CORE_3_API_URL),
         ]);
   
+        // Set state variables
         setmaunaArray(
           maunaLoaMonthlyResponse.data
             .map((mauna) => {
@@ -93,8 +98,7 @@ const Visual2 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
     fetchData();
   }, []);
   
-
-
+  // Define chart data and options
   const data = {
     datasets: [
       {
@@ -183,6 +187,7 @@ const options = {
     },
   };
 
+  // Render the component
   return (
     <div>
         <div>
@@ -194,7 +199,7 @@ const options = {
                 Based on Mauna Loa measurements and Antarctic ice cores.<br/>
                 Mauna Loa<a href="https://gml.noaa.gov/ccgg/trends"> data.</a><br/>
                 Mauna Loa <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html">data description.</a><br/>
-                Law Dome<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.da"> data.</a><br/>
+                Law Dome<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat"> data.</a><br/>
                 Law Dome <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html">data description.</a><br/>
               </p>
         </div>

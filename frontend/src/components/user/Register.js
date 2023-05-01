@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import '../../styles/Register.css';
 
+// Register component that handles user registration and login
 const Register = ({ isOpen, closeModal }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // Function to log in the user
   const loginUser = async (username, password) => {
     const response = await fetch(process.env.REACT_APP_LOGIN_USER_URL, {
       method: 'POST',
@@ -18,6 +20,7 @@ const Register = ({ isOpen, closeModal }) => {
     }
   };
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,10 +50,12 @@ const Register = ({ isOpen, closeModal }) => {
     }
   };
 
+  // Render nothing if the modal is not open
   if (!isOpen) {
     return null;
   }
 
+  // Render registration form
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
