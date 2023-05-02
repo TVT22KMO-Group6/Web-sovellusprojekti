@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useImmerReducer } from 'use-immer';
 import UserVisualList from '../components/user/UserVisualList';
 
+// Reducer function to manage user visuals state
 function userVisualsReducer(draft, action) {
   switch (action.type) {
     case 'deleted': {
@@ -15,12 +16,14 @@ function userVisualsReducer(draft, action) {
 
 const userVisuals = [];
 
+// Dashboard component displays user's profile and custom visuals
 export default function Dashboard() {
   const [visuals, dispatch] = useImmerReducer(userVisualsReducer, userVisuals);
   const [userData, setUserData] = useState("null");
   const [loadingUserVisuals, setLoadingUserVisuals] = useState(true);
   const [error, setError] = useState(null);
 
+  // Function to handle the deletion of a user's visual
   function handleDeleteTask(visualId) {
     fetch(`/api/user/visual/delete/${visualId}`, {
       method: 'DELETE',
@@ -46,6 +49,7 @@ export default function Dashboard() {
     })
   }
 
+  // Fetch user data and visuals using useEffect
   useEffect(() => {
     const fetchUserData = async () => {
       await fetch('/api/user/profile', {
@@ -65,6 +69,7 @@ export default function Dashboard() {
       })
     };
      
+    // Function to fetch user's custom visuals
     const fetchUserVisuals = async () => {
       await fetch('/api/user/visual', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
