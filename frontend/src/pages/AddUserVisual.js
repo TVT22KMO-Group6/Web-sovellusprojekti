@@ -7,7 +7,9 @@ import Visual3Chart from '../components/chart/Visual3Chart';
 import Visual4Chart from '../components/chart/Visual4Chart';
 import Visual5Chart from '../components/chart/Visual5Chart';
 
+// AddUserVisual component allows users to create custom views with selected visuals
 export default function AddUserVisual() {
+  // State variables to manage the visibility and data of each visual
   const [showVisual1, setShowVisual1] = useState(false);
   const [showVisual2, setShowVisual2] = useState(false);
   const [showVisual3, setShowVisual3] = useState(false);
@@ -22,6 +24,7 @@ export default function AddUserVisual() {
 
   let visualsData = {};
 
+  // Function to save the custom view to the server
   const handleSaveView = async () => {
     getVisualsData()
     if (Object.keys(visualsData).length === 0) {
@@ -39,6 +42,7 @@ export default function AddUserVisual() {
     }
   };
 
+  // Function to get the data from each visual and update the visualsData object
   const getVisualsData = () => {
     let showVisuals = [showVisual1, showVisual2, showVisual3, showVisual4, showVisual5];
     let datas = [visual1Data, visual2Data, visual3Data, visual4Data, visual5Data];
@@ -54,7 +58,7 @@ export default function AddUserVisual() {
     visualsData = mergedData;
   };
   
-
+  // Function to set the data for the specified visual
   const handleSetVisualData = (visualNumber, data) => {
     switch (visualNumber) {
       case 0:
@@ -80,7 +84,7 @@ export default function AddUserVisual() {
     }
     
   };
-
+  // Render the custom view form and the selected visuals
   return (
     <main role="main" className="container-fluid">
         <div>

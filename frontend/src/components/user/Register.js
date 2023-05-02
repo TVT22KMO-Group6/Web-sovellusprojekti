@@ -61,6 +61,7 @@ const Register = ({ isOpen, closeModal }) => {
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Register</h2>
         <form className="modal-form" onSubmit={handleSubmit}>
+          {/* Render username input */}
           <h4 className="label">Username *</h4>
           <input
             type="text"
@@ -70,7 +71,7 @@ const Register = ({ isOpen, closeModal }) => {
             aria-label="Username *"
             required
           />
-  
+          {/* Render password input */}
           <h4 className="label">Password *</h4>
           <input
             type="password"
@@ -80,7 +81,7 @@ const Register = ({ isOpen, closeModal }) => {
             aria-label="Password *"
             required
           />
-  
+          {/* Render buttons */}
           <div className="button-container">
             <button type="submit" className="modal-button">Register</button>
             <button type="button" className="modal-button" onClick={closeModal}>Cancel</button>

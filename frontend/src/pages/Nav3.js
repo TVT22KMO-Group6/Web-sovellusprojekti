@@ -7,11 +7,13 @@ import Visual4 from '../components/chart/Visual4Chart';
 import Visual5 from '../components/chart/Visual5Chart';
 
 function N3() {
+  // State variables for managing the visibility of each visualization
   const [visual1Visible, setVisual1Visible] = useState(true);
   const [visual2Visible, setVisual2Visible] = useState(true);
   const [visual4Visible, setVisual4Visible] = useState(true);
   const [visual5Visible, setVisual5Visible] = useState(true);
 
+  // Event handlers for updating the visibility state of each visualization
   const handleVisual1Change = (event) => {
     setVisual1Visible(event.target.checked);
   }
@@ -38,6 +40,7 @@ function N3() {
         <div className="content-N3">
           <h1>User</h1>
         </div>
+        {/* Render checkboxes for toggling the visibility of each visualization */}
         <div className="visual-checkboxes">
           <label>
             <input type="checkbox" checked={visual1Visible} onChange={handleVisual1Change} />
@@ -57,6 +60,7 @@ function N3() {
           </label>
         </div>
         
+        {/* Conditionally render each visualization based on its visibility state */}
         {visual1Visible && <div className="visual1-container"><Visual1 /></div>}
         {visual2Visible && <div className="visual2-container"><Visual2 /></div>}
         {visual4Visible && <div className="visual4-container"><Visual4 /></div>}
