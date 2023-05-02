@@ -115,6 +115,16 @@ const Visual5 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
 
   // Render the component
   return (
+
+    <div>
+          <h1>
+          CO2 emissions by sectors
+          </h1>
+            <p>
+            Interactive doughnut chart displays the percentage breakdown of CO2 emissions by sector.  <br/>
+              <a href="https://ourworldindata.org/emissions-by-sector#co2-emissions-by-sector">Data description.</a><br/>
+              <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx">Dataset</a><br/>
+            </p>
       <div>
         <div className="chart5-container">
         {displayedChart === 'sector' ? (
@@ -129,6 +139,7 @@ const Visual5 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           defaultValue={userVisualOptions || "CO2 Emissions by Sectors"}
           onChange={e=> handleSetVisualData(5, e.target.value)}>
         </textarea>
+      </div>
       </div>
       
 
