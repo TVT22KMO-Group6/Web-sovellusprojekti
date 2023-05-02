@@ -17,14 +17,14 @@ const sortDataByYear = (a, b) => {
 const getYearRegex = function(string) {
   const regexp = /^.*?\. (\d+)/;
   const regexp2 = /^.*?, (\d+)/;
-  const match = string.match(regexp);
+  let match = string.match(regexp);
   if ( match == null ){
     match = string.match(regexp2);
   }
   return "Year: " + match[1] * 1000;
 }
 
-const Visual3 = () => {
+const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) => {
   const [GlobalData, setGlobalArray] = useState([]);
   const [CarbonData, setCarbonArray] = useState([]);
   // const [EventData, setEventArray] = useState([]);
@@ -194,6 +194,12 @@ const Visual3 = () => {
         <div style={{ width: "100%", height: "80vh" }}>
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <Line data={data} options={options} />
+            <textarea
+              disabled={userVisualOptions != null || !addingNewUserView}
+              className="form-control"
+              defaultValue={userVisualOptions || "Evolution of global temperature"}
+              onChange={e=> handleSetVisualData(3, e.target.value)}>
+            </textarea>
           </div>
         </div>
       </div>

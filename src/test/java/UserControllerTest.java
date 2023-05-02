@@ -21,6 +21,7 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    //Register user
     @BeforeEach
     @Transactional
     public void prepareUser() throws Exception {
@@ -43,6 +44,7 @@ public class UserControllerTest {
                 .andExpect(status().isCreated());
     }
 
+    //Delete user
     @Test
     @WithMockUser(username = "testuser1")
     public void deleteUserTest() throws Exception {

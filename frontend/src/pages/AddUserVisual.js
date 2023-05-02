@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/AddUserVisual.css';
 import Visual1Chart from '../components/chart/Visual1Chart';
 import Visual2Chart from '../components/chart/Visual2Chart';
 import Visual3Chart from '../components/chart/Visual3Chart';
@@ -12,6 +13,7 @@ export default function AddUserVisual() {
   const [showVisual3, setShowVisual3] = useState(false);
   const [showVisual4, setShowVisual4] = useState(false);
   const [showVisual5, setShowVisual5] = useState(false);
+  const [chartMode, setChartMode] = useState(false);
   const [visual1Data, setVisual1Data] = useState(null);
   const [visual2Data, setVisual2Data] = useState(null);
   const [visual3Data, setVisual3Data] = useState(null);
@@ -47,14 +49,17 @@ export default function AddUserVisual() {
         continue;
       }
       mergedData['visual' + Number(1 + i)] = datas[i] ?? "";
-      console.log(datas[i]);
     }
+    mergedData['chartMode'] = chartMode;
     visualsData = mergedData;
   };
   
 
   const handleSetVisualData = (visualNumber, data) => {
     switch (visualNumber) {
+      case 0:
+        setChartMode(data);
+        break;
       case 1:
         setVisual1Data(data);
         break;
@@ -78,54 +83,60 @@ export default function AddUserVisual() {
 
   return (
     <main role="main" className="container-fluid">
-      <div className='my-1'>
-        <button type="button" className="btn btn-primary" onClick={handleSaveView}>Save View</button>
-      </div>
-      <div className='form-check form-check-inline form-switch'>
-        <input className="form-check-input" type="checkbox" name="showVisual1" id="visual1Checkbox" value="showVisual1" onChange={() => setShowVisual1(!showVisual1)}/>
-        <label className="form-check-label" htmlFor="visual1Checkbox">Visual 1</label>
-      </div>
-      <div className='form-check form-check-inline form-switch'>
-        <input className="form-check-input" type="checkbox" name="showVisual2" id="visual2Checkbox" value="showVisual2" onChange={() => setShowVisual2(!showVisual2)}/>
-        <label className="form-check-label" htmlFor="visual2Checkbox">Visual 2</label>
-      </div>
-      <div className='form-check form-check-inline form-switch'>
-        <input className="form-check-input" type="checkbox" name="showVisual3" id="visual3Checkbox" value="showVisual3" onChange={() => setShowVisual3(!showVisual3)}/>
-        <label className="form-check-label" htmlFor="visual3Checkbox">Visual 3</label>
-      </div>
-      <div className='form-check form-check-inline form-switch'>
-        <input className="form-check-input" type="checkbox" name="showVisual4" id="visual4Checkbox" value="showVisual4" onChange={() => setShowVisual4(!showVisual4)}/>
-        <label className="form-check-label" htmlFor="visual4Checkbox">Visual 4</label>
-      </div>
-      <div className='form-check form-check-inline form-switch'>
-        <input className="form-check-input" type="checkbox" name="showVisual5" id="visual5Checkbox" value="showVisual5" onChange={() => setShowVisual5(!showVisual5)}/>
-        <label className="form-check-label" htmlFor="visual5Checkbox">Visual 5</label>
-      </div>
-      {showVisual1 && (
-        <div className='visual1-user-container'>
-          <Visual1Chart addingNewUserView={true} handleSetVisualData={handleSetVisualData}/>
+        <div>
+          <button type="button" className="btn btn-primary" onClick={handleSaveView}>Save View</button>
         </div>
-      )}
-      {showVisual2 && (
-        <div className='visual2-user-container'>
-          <Visual2Chart/>
+        <div className='form-check form-check-inline form-switch'>
+          <input className="form-check-input" type="checkbox" name="showVisual1" id="visual1Checkbox" value="showVisual1" onChange={() => setShowVisual1(!showVisual1)}/>
+          <label className="form-check-label" htmlFor="visual1Checkbox">Visual 1</label>
         </div>
-      )}
-      {showVisual3 && (
-        <div className='visual3-user-container'>
-          <Visual3Chart/>
+        <div className='form-check form-check-inline form-switch'>
+          <input className="form-check-input" type="checkbox" name="showVisual2" id="visual2Checkbox" value="showVisual2" onChange={() => setShowVisual2(!showVisual2)}/>
+          <label className="form-check-label" htmlFor="visual2Checkbox">Visual 2</label>
         </div>
-      )}
-      {showVisual4 && (
-        <div className='visual4-user-container'>
-          <Visual4Chart/>
+        <div className='form-check form-check-inline form-switch'>
+          <input className="form-check-input" type="checkbox" name="showVisual3" id="visual3Checkbox" value="showVisual3" onChange={() => setShowVisual3(!showVisual3)}/>
+          <label className="form-check-label" htmlFor="visual3Checkbox">Visual 3</label>
         </div>
-      )}
-      {showVisual5 && (
-        <div className='visual5-user-container'>
-          <Visual5Chart/>
+        <div className='form-check form-check-inline form-switch'>
+          <input className="form-check-input" type="checkbox" name="showVisual4" id="visual4Checkbox" value="showVisual4" onChange={() => setShowVisual4(!showVisual4)}/>
+          <label className="form-check-label" htmlFor="visual4Checkbox">Visual 4</label>
         </div>
-      )}
+        <div className='form-check form-check-inline form-switch'>
+          <input className="form-check-input" type="checkbox" name="showVisual5" id="visual5Checkbox" value="showVisual5" onChange={() => setShowVisual5(!showVisual5)}/>
+          <label className="form-check-label" htmlFor="visual5Checkbox">Visual 5</label>
+        </div>
+        <div className='form-check form-check form-switch'>
+          <input className="form-check-input" type="checkbox" name="chartsMode" id="chartsMode" value="chartsMode" onChange={() => handleSetVisualData(0, !chartMode)}/>
+          <label className="form-check-label" htmlFor="chartsMode">2 Charts per row</label>
+        </div>
+        <div className={`two-rows-${chartMode}`}>
+          {showVisual1 && (
+            <div className='visual1-user-container'>
+              <Visual1Chart addingNewUserView={true} handleSetVisualData={handleSetVisualData}/>
+            </div>
+          )}
+          {showVisual2 && (
+            <div className='visual2-user-container'>
+              <Visual2Chart addingNewUserView={true} handleSetVisualData={handleSetVisualData}/>
+            </div>
+          )}
+          {showVisual3 && (
+            <div className='visual3-user-container'>
+              <Visual3Chart addingNewUserView={true} handleSetVisualData={handleSetVisualData}/>
+            </div>
+          )}
+          {showVisual4 && (
+            <div className='visual4-user-container'>
+              <Visual4Chart addingNewUserView={true} handleSetVisualData={handleSetVisualData}/>
+            </div>
+          )}
+          {showVisual5 && (
+            <div className='visual5-user-container'>
+              <Visual5Chart addingNewUserView={true} handleSetVisualData={handleSetVisualData}/>
+            </div>
+          )}
+        </div>
     </main>
   );
 };

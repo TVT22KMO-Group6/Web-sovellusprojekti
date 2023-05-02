@@ -3,20 +3,24 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
+// Function to sort data by date
 const sortDataByDate = (a, b) => {
   return a.x - b.x;
 };
 
-const Visual2 = () => {
+const Visual2 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) => {
+  // Define state variables
   const [maunaLoaMonthly, setmaunaArray] = useState([]);
   const [maunaLoaAnnual, setmaunaArrayM] = useState([]);
   const [iceCore1, seticeCore1Array] = useState([]);
   const [iceCore2, seticeCore2Array] = useState([]);
   const [iceCore3, seticeCore3Array] = useState([]);
 
+  // Fetch emission sectors data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch data from multiple APIs using Promise.all
         const [   
           maunaLoaMonthlyResponse,
           maunaLoaAnnualResponse,
@@ -31,6 +35,7 @@ const Visual2 = () => {
           axios.get(process.env.REACT_APP_VISUAL_2_ICE_CORE_3_API_URL),
         ]);
   
+        // Set state variables
         setmaunaArray(
           maunaLoaMonthlyResponse.data
             .map((mauna) => {
@@ -93,8 +98,7 @@ const Visual2 = () => {
     fetchData();
   }, []);
   
-
-
+  // Define chart data and options
   const data = {
     datasets: [
       {
@@ -122,6 +126,7 @@ const Visual2 = () => {
     backgroundColor: 'rgba(102, 0, 51, 0.5)',
     pointRadius: 3,
     pointHitRadius: 20,
+    hidden: true,
   },
   {
     label: 'Ice Core 2',
@@ -130,6 +135,7 @@ const Visual2 = () => {
     backgroundColor: 'rgba(51, 51, 153, 0.5)',
     pointRadius: 3,
     pointHitRadius: 20,
+    hidden: true,
   },
   {
     label: 'Ice Core 3',
@@ -138,6 +144,7 @@ const Visual2 = () => {
     backgroundColor: 'rgba(0, 102, 204, 0.5)',
     pointRadius: 3,
     pointHitRadius: 20,
+    hidden: true,
   },
 ],
 };
@@ -172,7 +179,7 @@ const options = {
       },
       title: {
         display: true,
-        text: 'Antarctic Ice Core records of atmospheric CO2 ratios combined with Mauna Loa measurements',
+        text: 'Mauna Loa measurements combined with Antarctic Ice Core records of atmospheric CO2 ratios',
       },
     },
     adapters: {
@@ -180,6 +187,7 @@ const options = {
     },
   };
 
+  // Render the component
   return (
     <div>
         <div>
@@ -191,11 +199,18 @@ const options = {
                 Based on Mauna Loa measurements and Antarctic ice cores.<br/>
                 Mauna Loa<a href="https://gml.noaa.gov/ccgg/trends"> data.</a><br/>
                 Mauna Loa <a href="https://gml.noaa.gov/ccgg/about/co2_measurements.html">data description.</a><br/>
-                Law Dome<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.da"> data.</a><br/>
+                Law Dome<a href="https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/lawdome.combined.dat"> data.</a><br/>
                 Law Dome <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html">data description.</a><br/>
               </p>
         </div>
         <Line data={data} options={options} />
+        <label>Description</label>
+        <textarea
+          disabled={userVisualOptions != null || !addingNewUserView}
+          className="form-control"
+          defaultValue={userVisualOptions || "Atmospheric CO2 concentrations"}
+          onChange={e=> handleSetVisualData(2, e.target.value)}>
+        </textarea>
       </div>
 
   );

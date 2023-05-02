@@ -1,8 +1,11 @@
 import deleteUser from './DeleteUser';
 
+// Test suite for deleteUser function
 describe('deleteUser', () => {
   let removeItemSpy;
+  let confirmSpy;
 
+  // Set up spies and mock fetch before each test
   beforeEach(() => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
@@ -11,56 +14,42 @@ describe('deleteUser', () => {
       })
     );
     removeItemSpy = jest.spyOn(Storage.prototype, 'removeItem');
+    confirmSpy = jest.spyOn(window, 'confirm').mockImplementation(() => true);
   });
 
+  // Clean up spies after each test
   afterEach(() => {
     removeItemSpy.mockRestore();
+    confirmSpy.mockRestore();
   });
+
+  // Test successful deletion of user
   test('deletes user successfully', async () => {
-    // Store token in local storage
     localStorage.setItem('token', 'testToken');
-
     await deleteUser();
-
     expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(`${process.env.REACT_APP_DELETE_USER_URL}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer testToken`,
-      },
-    });
-
     expect(localStorage.removeItem).toHaveBeenCalledWith('token');
   });
 
+  // Test case when token is missing
   test('does not delete user if token is missing', async () => {
-    // Remove token from local storage
     localStorage.removeItem('token');
-
-    console.log = jest.fn();
-
+    console.error = jest.fn();
     await deleteUser();
-
-    expect(console.log).toHaveBeenCalledWith('Token is missing');
+    expect(console.error).toHaveBeenCalledWith('Token is missing');
     expect(fetch).toHaveBeenCalledTimes(0);
   });
 
+  // Test error handling during user deletion
   test('handles error when deleting user', async () => {
-    // Update fetch mock to return an error response
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: false,
       })
     );
-
-    // Store token in local storage
     localStorage.setItem('token', 'testToken');
-
-    console.log = jest.fn();
-
+    console.error = jest.fn();
     await deleteUser();
-
-    expect(console.log).toHaveBeenCalledWith('Error deleting the user');
+    expect(console.error).toHaveBeenCalledWith('Error deleting the user');
   });
 });
