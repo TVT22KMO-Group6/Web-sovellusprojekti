@@ -1,0 +1,449 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "u99ghsvpkhcj1"
+  },
+  "info": {
+    "title": "websovellus",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "api/user/login": {
+      "post": {
+        "summary": "",
+        "operationId": "post-login",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {}
+        }
+      },
+      "parameters": []
+    },
+    "api/user/register": {
+      "post": {
+        "summary": "",
+        "operationId": "post-register",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Post user to database\n"
+      },
+      "parameters": []
+    },
+    "api/user/logout": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-logout"
+      },
+      "parameters": []
+    },
+    "api/user/delete": {
+      "delete": {
+        "summary": "",
+        "operationId": "delete-user-delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/api/visual1": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-v1",
+        "description": ""
+      },
+      "parameters": []
+    },
+    "/api/visual2": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-v2",
+        "requestBody": {
+          "content": {}
+        }
+      },
+      "parameters": []
+    },
+    "/api/visual3": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-v3"
+      },
+      "parameters": []
+    },
+    "/api/visual4": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-v4"
+      },
+      "parameters": []
+    },
+    "/api/visual5/emission-sectors": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-v5"
+      },
+      "parameters": []
+    },
+    "/api/visual5/emission-subsectors": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-v5sub"
+      },
+      "parameters": []
+    },
+    "/userView": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-view"
+      },
+      "parameters": []
+    },
+    "/userView/create": {
+      "post": {
+        "summary": "",
+        "operationId": "post-view-create",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/userView/delete": {
+      "post": {
+        "summary": "",
+        "operationId": "post-view-delete",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/userView/{url}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "url",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-view-url"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "examples": [
+          {
+            "id": 142,
+            "firstName": "Alice",
+            "lastName": "Smith",
+            "email": "alice.smith@gmail.com",
+            "dateOfBirth": "1997-10-31",
+            "emailVerified": true,
+            "signUpDate": "2019-08-24"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "qi9kue68nqjpz"
+            }
+          },
+          "username": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "7a8b0aqeu0uk1"
+            }
+          },
+          "Password": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "d7ze18je1p2e3"
+            },
+            "format": "password"
+          }
+        },
+        "required": [
+          "username",
+          "Password"
+        ]
+      },
+      "user_visualization": {
+        "title": "user_visualization",
+        "x-stoplight": {
+          "id": "ays8sm850zk0n"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "user_id": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "rei1sq8kelso9"
+            }
+          },
+          "url": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "uyy6cqb4prtmx"
+            }
+          }
+        }
+      },
+      "Territorial_emission": {
+        "title": "Territorial_emission",
+        "x-stoplight": {
+          "id": "psy8s30nx0bmi"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "year": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "z3mckshyol99n"
+            }
+          },
+          "country": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "mjh895gwjlcpy"
+            }
+          },
+          "emission": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "pg45vwbtz1ycz"
+            }
+          }
+        }
+      },
+      "temperature_evolution": {
+        "title": "temperature_evolution",
+        "x-stoplight": {
+          "id": "jyr5zertknfju"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "year": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "a6xe82dge1ixp"
+            }
+          },
+          "data": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "6i8pxswovpj7o"
+            }
+          },
+          "event": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "z23ckx9e7u6dg"
+            }
+          }
+        }
+      },
+      "co2_concentrations": {
+        "title": "co2_concentrations",
+        "x-stoplight": {
+          "id": "2upjt9tnp4vfd"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "year": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "it3x35azot1yh"
+            }
+          },
+          "month": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "p5snsuwylfco2"
+            }
+          },
+          "data": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "7sauutry7b2qh"
+            }
+          },
+          "timeframe": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "asrwel7oh8c05"
+            }
+          },
+          "ice_core": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "2luuhfa32vy8g"
+            }
+          }
+        }
+      },
+      "co_2_emission_sub_sector": {
+        "title": "co_2_emission_sub_sector",
+        "x-stoplight": {
+          "id": "2jo056csxv3gb"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "4wrw3xs3mo1o8"
+            }
+          },
+          "sector": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "nhlcxb5v1skej"
+            }
+          },
+          "co2_emission_sector": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "gl89todgknfvl"
+            }
+          },
+          "share": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "87ic8ihwsivrd"
+            }
+          }
+        }
+      },
+      "co2_emission_sector": {
+        "title": "co2_emission_sector",
+        "x-stoplight": {
+          "id": "p6fh1cpklbk7g"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "x-stoplight": {
+              "id": "bugo2siqlo61o"
+            }
+          },
+          "sector": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "9ocxlznzssj0d"
+            }
+          },
+          "share": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "jhjlqqydnhu2k"
+            }
+          }
+        }
+      },
+      "temperature": {
+        "title": "temperature",
+        "x-stoplight": {
+          "id": "zxfgfwstr4b5v"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "time": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "xxa638l376ifl"
+            },
+            "format": "time"
+          },
+          "temperature": {
+            "type": "number",
+            "x-stoplight": {
+              "id": "bogthgjnxhyxu"
+            },
+            "format": "float"
+          },
+          "hemisphere": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "mtu5xjsct0rhx"
+            }
+          },
+          "timeframe": {
+            "type": "string",
+            "x-stoplight": {
+              "id": "x90bm1f2nr79p"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {},
+    "responses": {},
+    "parameters": {},
+    "securitySchemes": {},
+    "examples": {}
+  }
+}
