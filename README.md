@@ -2,6 +2,8 @@
 
 TVT22KMO – Jani Heikkilä, Pasi Karpinmaa, Mika Sarajärvi ja Sami Tapalinen
 
+Jokainen ryhmän jäsen on toiminut Full Stack -kehittäjänä
+
 ## Esittely
 
 ClimateStats-sovelluksen ovat toteuttaneet Oulun ammattikorkeakoulun tieto- ja viestintätekniikan 2. vuoden opiskelijat ryhmätyönä. Sovelluksessa käyttäjä pystyy tarkastelemaan ilmastonmuutokseen liittyvää tilastodataa graafisten tilastokäyrien avulla. Tilastokäyriin on käytetty useista eri lähteistä peräisin olevaa tieteelliseen tutkimukseen perustuvaa aineistotietoa, jossa on tilastoitu mm. pitkän aikavälin ilmakehän hiilidioksidipitoisuuksia, ilman lämpötilojen vaihtelua sekä eri valtioiden ja sektoreiden tuottamia hiilidioksidipäästömääriä.
@@ -19,7 +21,8 @@ Sovelluksen ylälaidasta olevasta navigointipalkista käyttäjä voi valita kolm
 
 Käyttäjä voi myös rekisteröityä sovellukseen luomalla tunnuksen navigointipalkista löytyvästä napista. Tämän avulla hän pystyy tallentamaan näkymä 3 –valikossa tekemänsä muokkaukset ja luomaan julkisen osoitteen luodulle näkymälle. Käyttäjä voi halutessaan poistaa luomansa näkymät sekä oman tunnuksen.
 
-<img width="800" alt="Picture 1" src="https://user-images.githubusercontent.com/104459173/235232904-bb557b69-d926-420d-a7ff-4f63cd7241f8.png">
+<img width="800" alt="Screenshot 2023-05-03 at 17 45 35" src="https://user-images.githubusercontent.com/104459173/235952126-ecf4c644-077d-4df7-b197-bf366f7b0f2e.png">
+
 
 ## Sovelluksen arkkitehtuuri
 
@@ -50,7 +53,13 @@ git clone https://github.com/TVT22KMO-Group6/Web-sovellusprojekti.git
 
 ### Backendin käynnistys 
 
-Tietokantatallenne löytyy hakemistosta (lisätään myöhemmin). Käynnistä tietokantapalvelin haluamallasi tavalla. Määritä Java-projektin 'application.properties' -tiedostoon tarvittavat tiedot tietokantayhteyden muodostamiseksi. Käynnistä Java-palvelin haluamallasi tavalla. 
+Tietokantatallenne löytyy hakemistosta (lisätään myöhemmin). 
+
+Käynnistä tietokantapalvelin haluamallasi tavalla. 
+
+Määritä Java-projektin 'application.properties' -tiedostoon tarvittavat tiedot tietokantayhteyden muodostamiseksi. 
+
+Käynnistä Java-palvelin haluamallasi tavalla. 
 
 ### application.properties: 
 
@@ -65,7 +74,6 @@ spring.jpa.show-sql=true
 app.jwt.secret= 
 ```
 
-Tietokantapalvelin toimii oletuksena osoitteessa (lisätään myöhemmin). 
 
 Backend-palvelin toimii oletuksena osoitteessa https://localhost:8080. 
 
