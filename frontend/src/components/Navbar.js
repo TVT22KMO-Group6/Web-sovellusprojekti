@@ -33,7 +33,7 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
             <div className="dropdown-menu" aria-labelledby="dropdown01">
               <a className="dropdown-item" href="/N1">N1</a>
               <a className="dropdown-item" href="/N2">N2</a>
-              <a className="dropdown-item" href="/user/visual/new">N3</a>
+              <a className="dropdown-item" href="/newuservisual">N3</a>
             </div>
           </li>
         </ul>

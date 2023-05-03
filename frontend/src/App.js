@@ -42,7 +42,7 @@ function App() {
               openLoginModal={openLoginModal} />
       <Routes>
         <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> }/>
-        <Route path="/user/visual/new" element={ <ProtectedRoute> <Nav3 /> </ProtectedRoute> }/>
+        <Route path="/newuservisual" element={ <ProtectedRoute> <Nav3 /> </ProtectedRoute> }/>
         <Route path="/visual1" element={<Visual1 />} />
         <Route path="/visual2" element={<Visual2 />} />
         <Route path="/visual3" element={<Visual3 />} />
