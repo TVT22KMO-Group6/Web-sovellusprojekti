@@ -40,8 +40,8 @@ public class Visual3Service {
         return teRepository.findByType("Carbon");
       }
 
-     /*  public List<Temperature_evolution> getEventTextData() {
-        return teRepository.findByEventText("null");
-      } */
+      public List<Temperature_evolution> getEventData() {
+        return teRepository.findByType("Event");
+      } 
       
 }

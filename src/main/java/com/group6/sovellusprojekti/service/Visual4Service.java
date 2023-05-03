@@ -50,5 +50,4 @@ public class Visual4Service {
         return TEmissionRepository.findByYear(year); 
     }
    
-
 }
