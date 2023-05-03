@@ -152,6 +152,7 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
   
     // Chart options
     const options = {
+      maintainAspectRatio: false,
       responsive: true,
       plugins: {
         tooltip: {
@@ -219,8 +220,10 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
                 <label htmlFor='monthly'>Monthly</label>
               </div>
             </div>
+            <div className='visual1-parent-container'>
             {timeframe === "Annual" && <Line data={annualData} options={options} />}
-            {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}
+            {timeframe === "Monthly" && <Line data={monthlyData} options={options} />}        
+            </div> 
             <label>Description</label>
             <textarea
               disabled={userVisualOptions != null || !addingNewUserView}

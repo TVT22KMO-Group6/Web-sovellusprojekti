@@ -150,6 +150,7 @@ const Visual2 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
 };
 
 const options = {
+  maintainAspectRatio: false,
   responsive: true,
   scales: {
     x: {
@@ -203,7 +204,9 @@ const options = {
                 Law Dome <a href="https://cdiac.ess-dive.lbl.gov/trends/co2/lawdome.html">data description.</a><br/>
               </p>
         </div>
-        <Line data={data} options={options} />
+        <div className='visual2-parent-container'>
+          <Line data={data} options={options} />
+        </div>
         <label>Description</label>
         <textarea
           disabled={userVisualOptions != null || !addingNewUserView}

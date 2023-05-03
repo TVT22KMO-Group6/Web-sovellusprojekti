@@ -16,7 +16,6 @@ import RegisterModal from './components/user/Register';
 import LoginModal from './components/user/Login';
 import UserVisual from './pages/UserVisual';
 import Dashboard from './pages/Dashboard';
-import AddUserVisual from './pages/AddUserVisual';
 
 function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -43,7 +42,7 @@ function App() {
               openLoginModal={openLoginModal} />
       <Routes>
         <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute> }/>
-        <Route path="/user/visual/new" element={ <ProtectedRoute> <AddUserVisual /> </ProtectedRoute> }/>
+        <Route path="/user/visual/new" element={ <ProtectedRoute> <Nav3 /> </ProtectedRoute> }/>
         <Route path="/visual1" element={<Visual1 />} />
         <Route path="/visual2" element={<Visual2 />} />
         <Route path="/visual3" element={<Visual3 />} />
@@ -51,7 +50,6 @@ function App() {
         <Route path="/visual5" element={<Visual5 />} />
         <Route path="/N1" element={<Nav1 />} />
         <Route path="/N2" element={<Nav2 />} />
-        <Route path="/N3" element={<Nav3 />} />
         <Route path="/:url" element={<UserVisual />} />
         <Route path="/" element={<Frontpage />} />
       </Routes>

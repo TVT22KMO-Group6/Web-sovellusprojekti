@@ -66,6 +66,7 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
   };
 
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     plugins: {
       legend: {
@@ -97,19 +98,15 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
 
   return (
     <div>
-          <h1>
-          CO2 emissions by country
-          </h1>
-            <p>
-             Stacked line chart illustrates the historical trend of CO2 emissions for the selected countries between 1959 and 2020.  <br/>
-              <a href="https://www.icos-cp.eu/science-and-impact/global-carbon-budget/2021">Data description.</a><br/>
-              <a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D">Dataset</a><br/>
-            </p>
-
-   
-  
+      <div>
+        <h1>CO2 emissions by country</h1>
+          <p>
+            Stacked line chart illustrates the historical trend of CO2 emissions for the selected countries between 1959 and 2020.  <br/>
+            <a href="https://www.icos-cp.eu/science-and-impact/global-carbon-budget/2021">Data description.</a><br/>
+            <a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D">Dataset</a><br/>
+        </p>
+      </div>
       <h1>LineChart</h1>
-     
       <Select
         isMulti
         value={selectedCountries.map((country) => ({
@@ -120,9 +117,10 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
         onChange={(selectedOptions) =>
           setSelectedCountries(selectedOptions.map((option) => option.value))
         }
-        
       />
-      <Line options={options} data={data} />
+      <div className='visual4-parent-container'>
+        <Line options={options} data={data} />
+      </div>
       <textarea
         disabled={userVisualOptions != null || !addingNewUserView}
         className="form-control"

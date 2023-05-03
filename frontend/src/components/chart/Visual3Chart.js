@@ -211,18 +211,16 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           Southampton, Compiled by C. Patrick Doncaster, <a href="https://www.southampton.ac.uk/~cpd/history.html">Human Evolution and Activities Dataset</a><br/>
         </p>
         </div>
-        <div style={{ width: "100%", height: "100vh" }}>
-          <div style={{ position: "relative", width: "100%", height: "90%" }}>
-            <Line data={data} options={options} />
-            <label>Description</label>
-            <textarea
-              disabled={userVisualOptions != null || !addingNewUserView}
-              className="form-control"
-              defaultValue={userVisualOptions || "Evolution of global temperature"}
-              onChange={e=> handleSetVisualData(3, e.target.value)}>
-            </textarea>
-          </div>
+        <div className='visual3-parent-container'>
+          <Line data={data} options={options} />
         </div>
+          <label>Description</label>
+          <textarea
+            disabled={userVisualOptions != null || !addingNewUserView}
+            className="form-control"
+            defaultValue={userVisualOptions || "Evolution of global temperature"}
+            onChange={e=> handleSetVisualData(3, e.target.value)}>
+          </textarea>
       </div>
       );
     };
