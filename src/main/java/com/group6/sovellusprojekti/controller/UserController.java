@@ -24,6 +24,12 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    /**
+     * User registration endpoint
+     * 
+     * @param user
+     * @return ResponseEntity<User>
+     */
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         try {
@@ -35,6 +41,12 @@ public class UserController {
         }
     }
 
+    /**
+     * User delete endpoint
+     * 
+     * @param principal
+     * @return ResponseEntity<?>
+     */
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser(Principal principal) {
         try {
@@ -47,6 +59,12 @@ public class UserController {
         }
     }
     
+    /**
+     * User profile data endpoint
+     *
+     * @param userDetails
+     * @return User
+     */
     @GetMapping("/profile")
     public User getUser(@AuthenticationPrincipal UserDetails userDetails) {
         User user = userService.getUserByUsername(userDetails.getUsername());

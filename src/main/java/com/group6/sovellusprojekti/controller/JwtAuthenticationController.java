@@ -26,12 +26,26 @@ public class JwtAuthenticationController {
     @Autowired
     private final JwtUserDetailsService userDetailsService;
 
+    /**
+     * Constructor
+     * 
+     * @param authenticationManager
+     * @param jwtTokenUtil
+     * @param userDetailsService
+     */
     public JwtAuthenticationController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     * User login endpoint
+     * 
+     * @param authenticationRequest
+     * @return ResponseEntity<?>
+     * @throws Exception
+     */
     @PostMapping("/api/user/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -40,6 +54,13 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
+    /**
+     * Authenticate with username and password
+     * 
+     * @param username
+     * @param password
+     * @throws Exception
+     */
     private void authenticate(String username, String password) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));

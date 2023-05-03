@@ -14,6 +14,11 @@ public class UserService {
     @Autowired
     private EncoderService encoderService; 
 
+    /**
+     * User registration
+     * 
+     * @param user
+     */
     public void registerUser(User user) {
 
         if (userRepository.existsByUsername(user.getUsername())) {
@@ -24,6 +29,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Gets user by username
+     * 
+     * @param username
+     * @return User
+     */
     public User getUserByUsername(String username)
     {
         User user = userRepository.findByUsername(username);
@@ -33,6 +44,11 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Deletes user
+     *
+     * @param id
+     */
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

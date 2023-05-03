@@ -17,11 +17,21 @@ public class Visual1Controller {
     @Autowired
     private Visual1Service visual1Service;
 
+    /**
+     * Get all temperatures endpoint
+     * 
+     * @return List<Temperature>
+     */
     @GetMapping
     public List<Temperature> getTemperatures() {
         return visual1Service.getAllTemperatures();
     }
 
+    /**
+     * Get annual temperatures endpoint
+     * 
+     * @return List<Temperature>
+     */
     @GetMapping("/timeframe/annual")
     public List<Temperature> getAnnualTemperatures() {
         return visual1Service.getAllAnnualTemperatures();

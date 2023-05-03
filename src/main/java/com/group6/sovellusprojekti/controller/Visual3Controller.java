@@ -17,16 +17,31 @@ public class Visual3Controller {
     @Autowired
     private Visual3Service visual3Service;
 
+    /**
+     * Get all temperature evolutions endpoint
+     * 
+     * @return List<Temperature_evolution>
+     */
     @GetMapping
     public List<Temperature_evolution> getAllData() {
         return visual3Service.getAllData();
     }
 
+    /**
+     * Get all global type temperature evolutions endpoint
+     * 
+     * @return List<Temperature_evolution>
+     */
     @GetMapping("/type/Global")
     public List<Temperature_evolution> getGlobalData() {
         return visual3Service.getGlobalData();
     }
 
+    /**
+     * Get all carbon type temperature evolutions endpoint
+     * 
+     * @return List<Temperature_evolution>
+     */
     @GetMapping("/type/Carbon")
     public List<Temperature_evolution> getCarbonData() {
         return visual3Service.getCarbonData();
