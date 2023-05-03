@@ -14,7 +14,9 @@ const sortMonthlyData = (a, b) => {
   return a.time.localeCompare(b.time);
 };
 
+// Visual1Chart component renders a temperature anomaly chart based on the given data and user options
 const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData}) => {
+  // State variables for managing chart data and timeframe
   const [timeframe, setTimeframe] = useState("Annual");
   const [globalAnnualData, setGlobalAnnualData] = useState([]);
   const [northAnnualData, setNorthAnnualData] = useState([]);
@@ -24,6 +26,7 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
   const [northMonthlyData, setNorthMonthlyData] = useState([]);
   const [southMonthlyData, setSouthMonthlyData] = useState([]);
 
+  // Memoized data filtering to improve performance
   const filteredData = useMemo(() => {
     return {
       Global: {
@@ -44,11 +47,13 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
     };
   }, [globalAnnualData, northAnnualData, southAnnualData, reconstructionData, globalMonthlyData, northMonthlyData, southMonthlyData]);
 
+  // Fetch and process data on component mount
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(process.env.REACT_APP_VISUAL_1_API_URL);
       const json = await response.json();
 
+      // Process and set annual and monthly data for global, northern, and southern hemispheres, and reconstruction data
       setGlobalAnnualData(json.filter(data => data.hemisphere === 'Global' && data.timeframe === 'Annual')
         .sort(sortAnnualData)
         .map(data => ({ x: DateTime.fromFormat(data.time, "yyyy"), y: data.temperature }))
@@ -83,6 +88,7 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
     fetchData().catch(console.error);
   }, [])
 
+  // Functions for updating the timeframe state
   const TimeframeAnnual = () => {
     setTimeframe("Annual");
   };
@@ -90,7 +96,7 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
   const TimeframeMonthly= () => {
     setTimeframe("Monthly");
   };
-
+    // Data objects for annual and monthly datasets
     const annualData = {
       datasets: [
         {
@@ -144,6 +150,7 @@ const Visual1Chart = ({userVisualOptions, addingNewUserView, handleSetVisualData
       ],
     };
   
+    // Chart options
     const options = {
       responsive: true,
       plugins: {

@@ -4,12 +4,15 @@ import '../styles/Navbar.css';
 import ClimateStatsLogo from '../images/climatestatslogo3.png';
 import deleteUser from './user/DeleteUser';
 
+// Navbar component responsible for rendering the navigation bar
 const Navbar = ({ openRegisterModal, openLoginModal }) => {
 
+  // Helper function to check if the user is logged in
   const isLoggedIn = () => {
     return localStorage.getItem('token') !== null;
   };
 
+  // Function to handle user logout
   const logout = () => {
     localStorage.removeItem('token');
     window.location.reload(false);

@@ -13,18 +13,38 @@ public class Visual1Service {
     @Autowired
     private TemperatureRepository temperatureRepository;
 
+    /**
+     * Get all temperatures
+     *
+     * @return List<Temperature>
+     */
     public List<Temperature> getAllTemperatures() {
         return temperatureRepository.findAll();
     }
 
+    /**
+     * Get all monthly temperatures
+     *
+     * @return List<Temperature>
+     */
     public List<Temperature> getAllMonthlyTemperatures() {
         return temperatureRepository.findByTimeframe("Monthly");
     }
 
+    /**
+     * Get all annual temperatures
+     *
+     * @return List<Temperature>
+     */
     public List<Temperature> getAllAnnualTemperatures() {
         return temperatureRepository.findByTimeframe("Annual");
     }
 
+    /**
+     * Get all global hemispheres
+     *
+     * @return List<Temperature>
+     */
     public List<Temperature> getAllGlobalHemispheres() {
         return temperatureRepository.findByHemisphere("Global");
     }

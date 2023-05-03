@@ -96,8 +96,17 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
   };
 
   return (
+    <div>
+          <h1>
+          CO2 emissions by country
+          </h1>
+            <p>
+             Stacked line chart illustrates the historical trend of CO2 emissions for the selected countries between 1959 and 2020.  <br/>
+              <a href="https://www.icos-cp.eu/science-and-impact/global-carbon-budget/2021">Data description.</a><br/>
+              <a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D">Dataset</a><br/>
+            </p>
 
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+   
   
       <h1>LineChart</h1>
      
@@ -121,6 +130,7 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
         onChange={e=> handleSetVisualData(4, e.target.value)}>
       </textarea>
     </div>
+ 
 
   );
 }

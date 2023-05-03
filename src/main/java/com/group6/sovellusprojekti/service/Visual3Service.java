@@ -13,14 +13,29 @@ public class Visual3Service {
     @Autowired
     private Temperature_evolutionRepository teRepository;
 
+    /**
+     * Get all temperature evolutions
+     * 
+     * @return List<Temperature_evolution>
+     */
     public List<Temperature_evolution> getAllData() {
         return teRepository.findAll();
       }
 
+      /**
+       * Get global temperature evolutions
+       *
+       * @return List<Temperature_evolution>
+       */
       public List<Temperature_evolution> getGlobalData() {
         return teRepository.findByType("Global");
       }
       
+      /**
+       * Get all carbon data
+       *
+       * @return List<Temperature_evolution>
+       */
       public List<Temperature_evolution> getCarbonData() {
         return teRepository.findByType("Carbon");
       }

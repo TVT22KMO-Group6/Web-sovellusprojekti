@@ -19,6 +19,11 @@ class EmissionSectorController {
     @Autowired
     private Visual5Service service;
 
+    /**
+     * Get all emission sectors endpoint
+     * 
+     * @return List<EmissionSector>
+     */
     @GetMapping
     public List<EmissionSector> findAll() {
         return service.findAllEmissionSectors();
@@ -33,11 +38,22 @@ class EmissionSubSectorController {
     @Autowired
     private Visual5Service service;
 
+    /**
+     * Get all emission subsectors endpoint
+     *
+     * @return List<EmissionSubSector>
+     */
     @GetMapping
     public List<EmissionSubSector> findAll() {
         return service.findAllEmissionSubSectors();
     }
 
+    /**
+     * Get sector's subsector emissions endpoint
+     * 
+     * @param sectorId
+     * @return List<EmissionSubSector>
+     */
     @GetMapping("/{sectorId}")
     public List<EmissionSubSector> getEmissionSubSectorsBySectorId(@PathVariable Integer sectorId) {
         return service.findEmissionSubSectorsBySectorId(sectorId);

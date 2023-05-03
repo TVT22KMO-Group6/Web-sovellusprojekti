@@ -21,12 +21,31 @@ public class Visual4Service {
     }
     */
 
+    /**
+     * Get all territorial emissions
+     * 
+     * @return List<TEmission>
+     */
     public List<TEmission> getAllTEmissions() {
         return TEmissionRepository.findAll();
     }
+
+    /**
+     * Get all territorial emission by country
+     * 
+     * @param country
+     * @return List<TEmission>
+     */
     public List<TEmission> getAllTEmissionsByCountry(String country) {
         return TEmissionRepository.findByCountry(country);
     }
+
+    /**
+     * Get all territorials emission by year
+     * 
+     * @param year
+     * @return List<TEmission>
+     */
     public List<TEmission> getAllTEmissionsByYear(int year) {
         return TEmissionRepository.findByYear(year); 
     }

@@ -3,6 +3,7 @@ import '../styles/Frontpage.css'
 import natureImage from '../images/nature123.jpg';
 
 function FrontPage() {
+  // useEffect for animating text on the front page
   useEffect(() => {
     const text = document.querySelector('.text');
     const letters = text.textContent.split('');
@@ -17,8 +18,10 @@ function FrontPage() {
 
   return (
     <main role="main" className="container">
+      {/* Set background image */}
       <div className="background-image" style={{backgroundImage: `url(${natureImage})`}}></div>
       <div className="content">
+        {/* Animated text content about climate change */}
         <h1 className="text">
         Climate change refers to long-term shifts in temperatures and weather patterns. These shifts may be natural, such as through variations in the solar cycle. But since the 1800s, human activities have been the main driver of climate change, primarily due to burning fossil fuels like coal, oil and gas.
         Burning fossil fuels generates greenhouse gas emissions that act like a blanket wrapped around the Earth, trapping the sun’s heat and raising temperatures.

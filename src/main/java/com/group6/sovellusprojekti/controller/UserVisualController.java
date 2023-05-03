@@ -33,6 +33,13 @@ public class UserVisualController {
     @Autowired
     private UserVisualsService userVisualsService;
 
+    /**
+     * Save user visualization endpoint
+     * 
+     * @param principal
+     * @param userVisual
+     * @return UserVisualization
+     */
     @PostMapping
     public UserVisualization saveVisual(Principal principal, @RequestBody UserVisualization userVisual) {
         User user = userService.getUserByUsername(principal.getName());
@@ -42,11 +49,24 @@ public class UserVisualController {
         return userVisualsService.saveUserVisual(userVisual);
     }
 
+    /**
+     * Get custom user visualization endpoint
+     *
+     * @param url
+     * @return UserVisualization
+     */
     @GetMapping("/{url}")
     public UserVisualization getVisual(@PathVariable String url) {
         return userVisualsService.getByUrl(url);
     }
 
+    /**
+     * Delete custom user visualization endpoint
+     *
+     * @param principal
+     * @param id
+     * @return ResponseEntity<?>
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteVisual(Principal principal, @PathVariable Long id) {
         try {
@@ -66,6 +86,12 @@ public class UserVisualController {
         }
     }
 
+    /**
+     * Get all user custom visualizations endpoint
+     * 
+     * @param userDetails
+     * @return ResponseEntity<List<UserVisualization>>
+     */
     @GetMapping
     public ResponseEntity<List<UserVisualization>> list(@AuthenticationPrincipal UserDetails userDetails) {
         List<UserVisualization> types = userVisualsService.getUserVisuals(userDetails.getUsername());

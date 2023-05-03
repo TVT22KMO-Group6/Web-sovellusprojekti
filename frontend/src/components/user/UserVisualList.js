@@ -1,5 +1,6 @@
 import React from 'react';
 
+// UserVisualList component responsible for rendering a list of user visuals
 export default function UserVisualList({visuals, onDeleteVisual}) {
   return (
     <React.Fragment>
@@ -25,6 +26,7 @@ export default function UserVisualList({visuals, onDeleteVisual}) {
   );
 }
 
+// Visual component responsible for rendering a single visual
 function Visual({visual, onDelete}) {
   return (
     <tr>
@@ -37,6 +39,7 @@ function Visual({visual, onDelete}) {
   );
 }
 
+// Function to redirect the user to the "Add New Visual" page
 function AddNewVisual() {
   window.location.href = '/user/visual/new';
 }

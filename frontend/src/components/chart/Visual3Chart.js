@@ -5,6 +5,7 @@ import { DateTime } from 'luxon';
 import { Chart, LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 import 'chartjs-adapter-luxon';
 
+
 Chart.register(LineController, LineElement, PointElement, TimeScale, LinearScale, Title, Tooltip, Legend);
 
 // Function to sort data by year
@@ -22,7 +23,7 @@ const getYearRegex = function(string) {
   if ( match == null ){
     match = string.match(regexp2);
   }
-  return "Year: " + match[1] * 1000;
+  return "Year: " + match[1] * 1000 ;
 }
 
 // Define state variables
@@ -133,12 +134,15 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
             type: 'time',
             time: {
               unit: 'year',
+              displayFormats: {
+                year: 'yyyy BC'
+              }
           },
             position: 'bottom',
             reverse: true,
             title:{
               display: true,
-              text: "",
+              text: "Thousands of years",
             },
             ticks:{
                 stepSize: 0.5
@@ -155,6 +159,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           max: 290,
           ticks:{
             stepSize: 5
+            
             },
           },
           y1: {
@@ -177,7 +182,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
               intersect: false,
               callbacks: {
                 title: function(context) {
-                  return getYearRegex(context[0].label);
+                  return getYearRegex(context[0].label) + " BC";
                 }
               }
             },

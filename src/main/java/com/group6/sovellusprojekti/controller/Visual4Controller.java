@@ -17,16 +17,33 @@ public class Visual4Controller {
     @Autowired
     private Visual4Service visual4Service;
 
+    /**
+     * Get all territorial emissions endpoint
+     * 
+     * @return List<TEmission>
+     */
      @GetMapping
     public List<TEmission> getTEmissions() {
         return visual4Service.getAllTEmissions();
     }
     
+    /**
+     * Get territorial emissions by country endpoint
+     * 
+     * @param country
+     * @return List<TEmission>
+     */
     @GetMapping("/country")
     public List<TEmission> getTEmissionsByCountry(String country) {
         return visual4Service.getAllTEmissionsByCountry(country);
     }
     
+    /**
+     * Get territorial emissions by year endpoint
+     * 
+     * @param year
+     * @return List<TEmission>
+     */
     @GetMapping("/year")
     public List<TEmission> getTEmissionsByYear(int year) {
         return visual4Service.getAllTEmissionsByYear(year);
