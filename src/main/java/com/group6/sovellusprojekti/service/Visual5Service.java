@@ -18,14 +18,30 @@ public class Visual5Service {
     @Autowired
     private EmissionSubSectorRepository emissionSubSectorRepository;
 
+    /**
+     * Get all emission sectors
+     * 
+     * @return List<EmissionSector>
+     */
     public List<EmissionSector> findAllEmissionSectors() {
         return emissionSectorRepository.findAll();
     }
 
+    /**
+     * Get all emission subsectors
+     * 
+     * @return List<EmissionSector>
+     */
     public List<EmissionSubSector> findAllEmissionSubSectors() {
         return emissionSubSectorRepository.findAll();
     }
 
+    /**
+     * Get all emission subsectors by sector id
+     * 
+     * @param sectorId
+     * @return List<EmissionSubSector>
+     */
     public List<EmissionSubSector> findEmissionSubSectorsBySectorId(Integer sectorId) {
         return emissionSubSectorRepository.findByEmissionSector_Id(sectorId);
     }
