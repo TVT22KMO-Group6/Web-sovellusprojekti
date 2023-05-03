@@ -76,7 +76,8 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
             .map((event) => {
               return {
                 x: DateTime.fromObject({ year: event.year / 1000}),
-                y: event.data,
+                y: 0,
+                z: event.eventText
               };
             })
             
@@ -118,7 +119,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           pointBorderColor: 'rgb(0, 0, 0)',
           pointRadius: 10,
         pointHitRadius: 1,
-        yAxisID: 'y1',
+        yAxisID: 'y2',
         showLine: false,
         }, 
       ],
@@ -129,7 +130,6 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-      
           x: {
             type: 'time',
             time: {
@@ -175,6 +175,15 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
             stepSize: 0.5
             }
           },
+          y2: {
+            display: false,
+            type: "linear",
+            min: -3.0,
+            max: 0.5,
+            grid: {
+              drawOnChartArea: false
+            },
+          },
         },
           plugins: {
             tooltip: {
@@ -182,7 +191,12 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
               intersect: false,
               callbacks: {
                 title: function(context) {
-                  return getYearRegex(context[0].label) + " BC";
+                  return getYearRegex(context[0].label) + " BC";                  
+                },
+                label: function(context) {
+                  if (context.datasetIndex == 2) {
+                    return context.raw.z;
+                  }
                 }
               }
             },
