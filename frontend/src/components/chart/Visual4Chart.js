@@ -106,7 +106,7 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
               <a href="https://data.icos-cp.eu/licence_accept?ids=%5B%22lApekzcmd4DRC34oGXQqOxbJ%22%5D">Dataset</a><br/>
             </p>
 
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+   
   
       <h1>LineChart</h1>
      
@@ -130,7 +130,7 @@ export default function Visual4Chart({userVisualOptions, addingNewUserView, hand
         onChange={e=> handleSetVisualData(4, e.target.value)}>
       </textarea>
     </div>
-    </div>
+ 
 
   );
 }
