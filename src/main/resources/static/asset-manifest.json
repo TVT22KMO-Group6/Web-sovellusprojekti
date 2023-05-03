@@ -1,16 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.d90c6d5f.css",
-    "main.js": "/static/js/main.99de3f4e.js",
+    "main.css": "/static/css/main.fae1d4ca.css",
+    "main.js": "/static/js/main.7bc19a0c.js",
     "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
     "static/media/nature123.jpg": "/static/media/nature123.e374363deacf3bd317be.jpg",
+    "static/media/climatestatslogo3.png": "/static/media/climatestatslogo3.ea8550ac51bdcbb69fb9.png",
+    "static/media/nature2.jpg": "/static/media/nature2.58d0bcfafb89240c6564.jpg",
+    "static/media/nature3.jpg": "/static/media/nature3.71b0f36eddb34a98e556.jpg",
+    "static/media/nature1.jpg": "/static/media/nature1.5ce2d9b1b6ba05f3abcd.jpg",
     "index.html": "/index.html",
-    "main.d90c6d5f.css.map": "/static/css/main.d90c6d5f.css.map",
-    "main.99de3f4e.js.map": "/static/js/main.99de3f4e.js.map",
+    "main.fae1d4ca.css.map": "/static/css/main.fae1d4ca.css.map",
+    "main.7bc19a0c.js.map": "/static/js/main.7bc19a0c.js.map",
     "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d90c6d5f.css",
-    "static/js/main.99de3f4e.js"
+    "static/css/main.fae1d4ca.css",
+    "static/js/main.7bc19a0c.js"
   ]
 }
