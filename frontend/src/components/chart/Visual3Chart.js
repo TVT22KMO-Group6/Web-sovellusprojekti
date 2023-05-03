@@ -29,7 +29,7 @@ const getYearRegex = function(string) {
 const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) => {
   const [GlobalData, setGlobalArray] = useState([]);
   const [CarbonData, setCarbonArray] = useState([]);
-  // const [EventData, setEventArray] = useState([]);
+  const [EventData, setEventArray] = useState([]);
 
   
   useEffect(() => {
@@ -39,11 +39,11 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
         const [
           GlobalDataResponse,
           CarbonDataResponse,
-        //  EventDataResponse,
+          EventDataResponse,
         ] = await Promise.all([
           axios.get(process.env.REACT_APP_VISUAL_3_GLOBAL_API_URL),
           axios.get(process.env.REACT_APP_VISUAL_3_CARBON_API_URL),
-         // axios.get(process.env.REACT_APP_VISUAL_3_EVENT_API_URL),
+          axios.get(process.env.REACT_APP_VISUAL_3_EVENT_API_URL),
         ]);
         
         // Set state variables
@@ -69,7 +69,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
             })
         );
     
-       /* setEventArray(
+        setEventArray(
           EventDataResponse.data
           .sort(sortDataByYear)
             .map((event) => {
@@ -79,7 +79,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
               };
             })
             
-        ); */
+        ); 
       } catch (error) {
         alert(error.response.data.error);
       }
@@ -95,7 +95,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           label: 'Global Data',
           data: GlobalData,
           borderColor: 'rgb(0, 0, 0)',
-          backgroundColor: 'rgb(0, 0, 0, 0.5)',
+          backgroundColor: 'rgb(0, 0, 0)',
           pointRadius: 0,
         pointHitRadius: 1,
         yAxisID: 'y1',
@@ -104,20 +104,22 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           label: 'Carbon Data',
           data: CarbonData,
           borderColor: 'rgb(255, 0, 0)',
-          backgroundColor: 'rgb(255, 0, 0, 0.5)',
+          backgroundColor: 'rgb(255, 0, 0)',
           pointRadius: 0,
         pointHitRadius: 1,
         yAxisID: 'y',
         },
-       /* {
+        {
           label: 'Events',
           data: EventData,
           borderColor: 'rgb(255, 200, 0)',
-          backgroundColor: 'rgb(255, 200, 0, 0.5)',
-          pointRadius: 0,
+          backgroundColor: 'rgb(255, 200, 0)',
+          pointBorderColor: 'rgb(0, 0, 0)',
+          pointRadius: 10,
         pointHitRadius: 1,
-        showLine: false
-        }, */
+        yAxisID: 'y1',
+        showLine: false,
+        }, 
       ],
     };
 
@@ -139,7 +141,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
               text: "",
             },
             ticks:{
-                stepSize: 1
+                stepSize: 0.5
             }
           },
           y: {
@@ -204,7 +206,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           Southampton, Compiled by C. Patrick Doncaster, <a href="https://www.southampton.ac.uk/~cpd/history.html">Human Evolution and Activities Dataset</a><br/>
         </p>
         </div>
-        <div style={{ width: "100%", height: "80vh" }}>
+        <div style={{ width: "100%", height: "100vh" }}>
           <div style={{ position: "relative", width: "100%", height: "90%" }}>
             <Line data={data} options={options} />
             <label>Description</label>
