@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, DoughnutController, ArcElement } from 'chart.js';
+import '../../styles/Charts.css';
 
 // Register the necessary Chart.js components
 Chart.register (DoughnutController, ArcElement );
@@ -126,7 +127,7 @@ const Visual5 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
               <a href="https://ourworldindata.org/uploads/2020/09/Global-GHG-Emissions-by-sector-based-on-WRI-2020.xlsx">Dataset</a><br/>
             </p>
       <div>
-        <div className="chart5-container">
+      <div className='visual5-parent-container'>
         {displayedChart === 'sector' ? (
           <Doughnut key={chartKey} data={sectorData} options={options} />
         ) : (

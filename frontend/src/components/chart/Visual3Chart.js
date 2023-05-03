@@ -76,7 +76,8 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
             .map((event) => {
               return {
                 x: DateTime.fromObject({ year: event.year / 1000}),
-                y: event.data,
+                y: 0,
+                z: event.eventText
               };
             })
             
@@ -118,7 +119,7 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           pointBorderColor: 'rgb(0, 0, 0)',
           pointRadius: 10,
         pointHitRadius: 1,
-        yAxisID: 'y1',
+        yAxisID: 'y2',
         showLine: false,
         }, 
       ],
@@ -129,7 +130,6 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-      
           x: {
             type: 'time',
             time: {
@@ -175,6 +175,15 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
             stepSize: 0.5
             }
           },
+          y2: {
+            display: false,
+            type: "linear",
+            min: -3.0,
+            max: 0.5,
+            grid: {
+              drawOnChartArea: false
+            },
+          },
         },
           plugins: {
             tooltip: {
@@ -182,7 +191,12 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
               intersect: false,
               callbacks: {
                 title: function(context) {
-                  return getYearRegex(context[0].label) + " BC";
+                  return getYearRegex(context[0].label) + " BC";                  
+                },
+                label: function(context) {
+                  if (context.datasetIndex == 2) {
+                    return context.raw.z;
+                  }
                 }
               }
             },
@@ -211,18 +225,16 @@ const Visual3 = ({userVisualOptions, addingNewUserView, handleSetVisualData}) =>
           Southampton, Compiled by C. Patrick Doncaster, <a href="https://www.southampton.ac.uk/~cpd/history.html">Human Evolution and Activities Dataset</a><br/>
         </p>
         </div>
-        <div style={{ width: "100%", height: "100vh" }}>
-          <div style={{ position: "relative", width: "100%", height: "90%" }}>
-            <Line data={data} options={options} />
-            <label>Description</label>
-            <textarea
-              disabled={userVisualOptions != null || !addingNewUserView}
-              className="form-control"
-              defaultValue={userVisualOptions || "Evolution of global temperature"}
-              onChange={e=> handleSetVisualData(3, e.target.value)}>
-            </textarea>
-          </div>
+        <div className='visual3-parent-container'>
+          <Line data={data} options={options} />
         </div>
+          <label>Description</label>
+          <textarea
+            disabled={userVisualOptions != null || !addingNewUserView}
+            className="form-control"
+            defaultValue={userVisualOptions || "Evolution of global temperature"}
+            onChange={e=> handleSetVisualData(3, e.target.value)}>
+          </textarea>
       </div>
       );
     };

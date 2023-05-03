@@ -5,7 +5,6 @@ export default function UserVisualList({visuals, onDeleteVisual}) {
   return (
     <React.Fragment>
       <div className='text-center'>
-      <button type="button" className="btn btn-primary m-1" onClick={AddNewVisual}>Add custom view</button>
       </div>
       
       <table className="table table-striped">
@@ -37,9 +36,4 @@ function Visual({visual, onDelete}) {
       </td>
     </tr>
   );
-}
-
-// Function to redirect the user to the "Add New Visual" page
-function AddNewVisual() {
-  window.location.href = '/user/visual/new';
 }
