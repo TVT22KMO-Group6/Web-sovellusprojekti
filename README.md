@@ -53,7 +53,6 @@ git clone https://github.com/TVT22KMO-Group6/Web-sovellusprojekti.git
 
 ### Backendin käynnistys 
 
-Tietokantatallenne löytyy hakemistosta Database. 
 
 Käynnistä tietokantapalvelin haluamallasi tavalla. 
 
