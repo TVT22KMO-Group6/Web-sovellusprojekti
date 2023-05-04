@@ -17,6 +17,13 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
     localStorage.removeItem('token');
     window.location.reload(false);
   };
+
+  const handleN3Click = (e) => {
+    if (!isLoggedIn()) {
+      e.preventDefault();
+      alert("Please login to view this page.");
+    }
+  };
   
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top px-3">
@@ -33,7 +40,7 @@ const Navbar = ({ openRegisterModal, openLoginModal }) => {
             <div className="dropdown-menu" aria-labelledby="dropdown01">
               <a className="dropdown-item" href="/N1">N1</a>
               <a className="dropdown-item" href="/N2">N2</a>
-              <a className="dropdown-item" href="/newuservisual">N3</a>
+              <a className="dropdown-item" href="/newuservisual" onClick={handleN3Click}>N3</a>
             </div>
           </li>
         </ul>
