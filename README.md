@@ -53,7 +53,7 @@ git clone https://github.com/TVT22KMO-Group6/Web-sovellusprojekti.git
 
 ### Backendin käynnistys 
 
-Tietokantatallenne löytyy hakemistosta (lisätään myöhemmin). 
+Tietokantatallenne löytyy hakemistosta Database. 
 
 Käynnistä tietokantapalvelin haluamallasi tavalla. 
 
@@ -65,13 +65,13 @@ Käynnistä Java-palvelin haluamallasi tavalla.
 
 ```bash
 spring.datasource.driver-class-name=org.postgresql.Driver 
-spring.datasource.url= 
-spring.datasource.username= 
-spring.datasource.password= 
+spring.datasource.url=jdbc:postgresql://dpg-cg8vr6l269v3ufl51kd0-a.frankfurt-postgres.render.com/group6
+spring.datasource.username=group6 
+spring.datasource.password=zelFLlxCWN4MwZRnchKE3ocEvR9L0K0d 
 spring.jpa.hibernate.ddl-auto=update 
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect 
 spring.jpa.show-sql=true 
-app.jwt.secret= 
+app.jwt.secret=E3zOKqEy7pT3Y5bL 
 ```
 
 
